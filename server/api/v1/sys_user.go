@@ -21,7 +21,7 @@ import (
 // @Tags Base
 // @Summary 用户注册账号
 // @Produce  application/json
-// @Param data body model.SysUser true "用户注册接口"
+// @Param data body request.RegisterStruct true "用户注册接口"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"注册成功"}"
 // @Router /base/register [post]
 func Register(c *gin.Context) {
