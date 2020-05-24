@@ -2,24 +2,42 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-        <el-form-item label="市值">
-          <el-input v-model="searchInfo.marketCapitalMin"></el-input>
-        </el-form-item>
-        <el-form-item label="-">
-          <el-input v-model="searchInfo.marketCapitalMax"></el-input>
-        </el-form-item>
-        <el-form-item label="涨幅">
-          <el-input v-model="searchInfo.percentMin"></el-input>
-        </el-form-item>
-        <el-form-item label="-">
-          <el-input v-model="searchInfo.percentMax"></el-input>
-        </el-form-item>
-        <el-form-item label="量比">
-          <el-input v-model="searchInfo.volume_ratio_min"></el-input>
-        </el-form-item>
-        <el-form-item label="-">
-          <el-input v-model="searchInfo.volume_ratio_max"></el-input>
-        </el-form-item>
+          <el-row>
+            <el-col :span="5">
+              <el-form-item label="市值">
+                <el-input placeholder="最小" type="number" v-model="searchInfo.marketCapitalMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="5">
+              <el-form-item label="">
+                <el-input placeholder="最大" type="number" v-model="searchInfo.marketCapitalMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="涨幅">
+              <el-input placeholder="最小" type="number" v-model="searchInfo.percentMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input placeholder="最大" type="number" v-model="searchInfo.percentMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="量比">
+              <el-input placeholder="最小" type="number" v-model="searchInfo.volume_ratio_min" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input placeholder="最大" type="number" v-model="searchInfo.volume_ratio_max" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item>
           <el-button @click="onSubmit" type="primary">查询</el-button>
         </el-form-item>
@@ -60,23 +78,35 @@
       return {
         listApi: getTopList,
         searchInfo: {
-          marketCapitalMin: 0,
-          marketCapitalMax: 0,
-          percentMin: 0,
-          percentMax: 0,
-          volume_ratio_min: 0,
-          volume_ratio_max: 0
+          marketCapitalMin: undefined,
+          marketCapitalMax: undefined,
+          percentMin: undefined,
+          percentMax: undefined,
+          volume_ratio_min: undefined,
+          volume_ratio_max: undefined
         },
       }
     },
     methods: {
       //搜索
       onSubmit() {
+        this.tableList()
+        setInterval(()=>{
+          this.tableList()
+        },20000)
+      },
+      tableList(){
+        this.searchInfo.marketCapitalMin = parseFloat(this.searchInfo.marketCapitalMin)
+        this.searchInfo.marketCapitalMax = parseFloat(this.searchInfo.marketCapitalMax)
+        this.searchInfo.percentMin = parseFloat(this.searchInfo.percentMin)
+        this.searchInfo.percentMax = parseFloat(this.searchInfo.percentMax)
+        this.searchInfo.volume_ratio_min = parseFloat(this.searchInfo.volume_ratio_min)
+        this.searchInfo.volume_ratio_max = parseFloat(this.searchInfo.volume_ratio_max)
         this.getTableData()
       }
     },
     created(){
-      this.getTableData()
+      this.tableList()
     }
   }
 </script>

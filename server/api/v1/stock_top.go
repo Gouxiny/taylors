@@ -26,7 +26,7 @@ func (*stockTop) StockTopList(c *gin.Context) {
 		return
 	}
 
-	stockList, err := service.StockTopService.TopList()
+	stockList, err := service.StockTopService.TopList(req)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取Top失败，%v", err), c)
 	} else {
