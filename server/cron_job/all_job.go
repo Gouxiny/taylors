@@ -38,6 +38,7 @@ func (job *allJob) Run() {
 		//	//获取历史数据
 		//	flag = true
 		//}
+		_ = maxId
 
 		for _, stock := range stockList {
 			if flag {
