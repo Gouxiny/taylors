@@ -34,10 +34,10 @@ func (job *allJob) Run() {
 		}
 
 		flag := false
-		if maxId < 1 {
-			//获取历史数据
-			flag = true
-		}
+		//if maxId < 1 {
+		//	//获取历史数据
+		//	flag = true
+		//}
 
 		for _, stock := range stockList {
 			if flag {
