@@ -12,12 +12,6 @@ type newStock struct {
 
 func newStockDao() *newStock {
 	stock := &model.Stock{}
-	if err := global.GVA_DB.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").AutoMigrate(stock).Error; err != nil {
-		panic(err)
-	}
-
-	global.GVA_DB.Model(stock).AddIndex("base_index", "symbol", "name", "exchange", "code")
-
 	return &newStock{Db: global.GVA_DB.Model(stock)}
 }
 

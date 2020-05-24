@@ -1,15 +1,17 @@
-package stock_service
+package service
 
 import (
 	"gin-vue-admin/model"
 	"taylors_proto/taylors_stock"
+	"time"
 )
 
-var StockService *stockService
+var StockTopService = new(stockTopService)
+var StockAllService = new(stockAllService)
+var StockMonitorService = new(stockMonitorService)
+var StockCommonService = new(stockCommonService)
 
-func init() {
-	StockService = new(stockService)
-}
+var _OverTime = time.Second * 10
 
 func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 	for _, top := range gstocks {
@@ -34,6 +36,7 @@ func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 			Volume:             int(top.Volume),
 			Amount:             top.Amount,
 			Percent:            top.Percent,
+			VolumeRatio:        top.VolumeRatio,
 			Time:               top.Time,
 		})
 	}

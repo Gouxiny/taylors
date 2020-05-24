@@ -53,6 +53,10 @@ definitions:
     properties:
       accessKey:
         type: string
+      bucket:
+        type: string
+      imgPath:
+        type: string
       secretKey:
         type: string
     type: object
@@ -123,6 +127,8 @@ definitions:
     properties:
       abbreviation:
         type: string
+      autoCreateApiToSql:
+        type: boolean
       fields:
         items:
           $ref: '#/definitions/model.Field'
@@ -160,6 +166,8 @@ definitions:
   model.Field:
     properties:
       columnName:
+        type: string
+      fieldDesc:
         type: string
       fieldJson:
         type: string
@@ -306,6 +314,13 @@ definitions:
           $ref: '#/definitions/model.SysBaseMenu'
         type: array
     type: object
+  request.AllDetailListReq:
+    properties:
+      page_num:
+        type: integer
+      page_size:
+        type: integer
+    type: object
   request.AuthorityIdInfo:
     properties:
       authorityId:
@@ -341,6 +356,13 @@ definitions:
       id:
         type: number
     type: object
+  request.MonitorListReq:
+    properties:
+      symbol_list:
+        items:
+          type: string
+        type: array
+    type: object
   request.PageInfo:
     properties:
       page:
@@ -357,6 +379,19 @@ definitions:
       password:
         type: string
       username:
+        type: string
+    type: object
+  request.RegisterStruct:
+    properties:
+      authorityId:
+        type: string
+      headerImg:
+        type: string
+      nickName:
+        type: string
+      passWord:
+        type: string
+      userName:
         type: string
     type: object
   request.SearchApiParams:
@@ -385,13 +420,22 @@ definitions:
       uuid:
         type: string
     type: object
+  request.StockTopListReq:
+    properties:
+      capital_end:
+        type: number
+      capital_start:
+        type: number
+      data_size:
+        type: integer
+    type: object
   response.SysAuthorityCopyResponse:
     properties:
       authority:
         $ref: '#/definitions/model.SysAuthority'
         type: object
       oldAuthorityId:
-        type: integer
+        type: string
     type: object
 info:
   contact: {}
@@ -411,7 +455,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysApi'
-          type: object
       produces:
       - application/json
       responses:
@@ -435,7 +478,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysApi'
-          type: object
       produces:
       - application/json
       responses:
@@ -475,7 +517,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.GetById'
-          type: object
       produces:
       - application/json
       responses:
@@ -499,7 +540,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.SearchApiParams'
-          type: object
       produces:
       - application/json
       responses:
@@ -523,7 +563,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysApi'
-          type: object
       produces:
       - application/json
       responses:
@@ -547,7 +586,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/response.SysAuthorityCopyResponse'
-          type: object
       produces:
       - application/json
       responses:
@@ -571,7 +609,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysAuthority'
-          type: object
       produces:
       - application/json
       responses:
@@ -595,7 +632,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysAuthority'
-          type: object
       produces:
       - application/json
       responses:
@@ -619,7 +655,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.PageInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -643,7 +678,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysAuthority'
-          type: object
       produces:
       - application/json
       responses:
@@ -667,7 +701,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysAuthority'
-          type: object
       produces:
       - application/json
       responses:
@@ -691,7 +724,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.AutoCodeStruct'
-          type: object
       produces:
       - application/json
       responses:
@@ -720,7 +752,7 @@ paths:
       summary: 生成验证码
       tags:
       - base
-  /base/captcha/:
+  /base/captcha/:captchaId:
     get:
       consumes:
       - application/json
@@ -745,7 +777,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.RegisterAndLoginStruct'
-          type: object
       produces:
       - application/json
       responses:
@@ -764,8 +795,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/model.SysUser'
-          type: object
+          $ref: '#/definitions/request.RegisterStruct'
       produces:
       - application/json
       responses:
@@ -787,7 +817,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.CasbinInReceive'
-          type: object
       produces:
       - application/json
       responses:
@@ -811,7 +840,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.CasbinInReceive'
-          type: object
       produces:
       - application/json
       responses:
@@ -835,7 +863,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.CasbinInReceive'
-          type: object
       produces:
       - application/json
       responses:
@@ -859,7 +886,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.ExaCustomer'
-          type: object
       produces:
       - application/json
       responses:
@@ -882,7 +908,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.ExaCustomer'
-          type: object
       produces:
       - application/json
       responses:
@@ -905,7 +930,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.ExaCustomer'
-          type: object
       produces:
       - application/json
       responses:
@@ -928,7 +952,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.ExaCustomer'
-          type: object
       produces:
       - application/json
       responses:
@@ -952,7 +975,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.PageInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -996,7 +1018,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.ExaFileUploadAndDownload'
-          type: object
       produces:
       - application/json
       responses:
@@ -1042,7 +1063,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.PageInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -1126,7 +1146,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.AuthorityIdInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -1150,7 +1169,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysBaseMenu'
-          type: object
       produces:
       - application/json
       responses:
@@ -1174,7 +1192,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.AddMenuAuthorityInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -1198,7 +1215,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.GetById'
-          type: object
       produces:
       - application/json
       responses:
@@ -1222,7 +1238,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.GetById'
-          type: object
       produces:
       - application/json
       responses:
@@ -1244,7 +1259,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.RegisterAndLoginStruct'
-          type: object
       produces:
       - application/json
       responses:
@@ -1266,7 +1280,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.RegisterAndLoginStruct'
-          type: object
       produces:
       - application/json
       responses:
@@ -1290,7 +1303,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.PageInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -1314,7 +1326,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysBaseMenu'
-          type: object
       produces:
       - application/json
       responses:
@@ -1327,6 +1338,75 @@ paths:
       summary: 更新菜单
       tags:
       - menu
+  /stock/all/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取监控列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.AllDetailListReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取监控列表
+      tags:
+      - Stock
+  /stock/monitor/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取监控列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.MonitorListReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取监控列表
+      tags:
+      - Stock
+  /stock/top/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取Top列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.StockTopListReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取Top列表
+      tags:
+      - Stock
   /system/ReloadSystem:
     post:
       parameters:
@@ -1336,7 +1416,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.System'
-          type: object
       produces:
       - application/json
       responses:
@@ -1372,7 +1451,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.System'
-          type: object
       produces:
       - application/json
       responses:
@@ -1394,7 +1472,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.ChangePasswordStruct'
-          type: object
       produces:
       - application/json
       responses:
@@ -1417,8 +1494,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/request.SetUserAuth'
-          type: object
+          $ref: '#/definitions/request.GetById'
       produces:
       - application/json
       responses:
@@ -1442,7 +1518,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.PageInfo'
-          type: object
       produces:
       - application/json
       responses:
@@ -1466,7 +1541,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/request.SetUserAuth'
-          type: object
       produces:
       - application/json
       responses:
@@ -1515,7 +1589,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/model.SysWorkflow'
-          type: object
       produces:
       - application/json
       responses:

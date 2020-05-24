@@ -33,7 +33,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysApi"
                         }
                     }
@@ -72,7 +71,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysApi"
                         }
                     }
@@ -138,7 +136,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.GetById"
                         }
                     }
@@ -177,7 +174,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.SearchApiParams"
                         }
                     }
@@ -216,7 +212,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysApi"
                         }
                     }
@@ -255,7 +250,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/response.SysAuthorityCopyResponse"
                         }
                     }
@@ -294,7 +288,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysAuthority"
                         }
                     }
@@ -333,7 +326,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysAuthority"
                         }
                     }
@@ -372,7 +364,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.PageInfo"
                         }
                     }
@@ -411,7 +402,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysAuthority"
                         }
                     }
@@ -450,7 +440,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysAuthority"
                         }
                     }
@@ -489,7 +478,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.AutoCodeStruct"
                         }
                     }
@@ -531,7 +519,7 @@
                 }
             }
         },
-        "/base/captcha/": {
+        "/base/captcha/:captchaId": {
             "get": {
                 "security": [
                     {
@@ -574,7 +562,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.RegisterAndLoginStruct"
                         }
                     }
@@ -605,8 +592,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "$ref": "#/definitions/model.SysUser"
+                            "$ref": "#/definitions/request.RegisterStruct"
                         }
                     }
                 ],
@@ -644,7 +630,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.CasbinInReceive"
                         }
                     }
@@ -683,7 +668,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.CasbinInReceive"
                         }
                     }
@@ -722,7 +706,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.CasbinInReceive"
                         }
                     }
@@ -761,7 +744,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.ExaCustomer"
                         }
                     }
@@ -798,7 +780,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.ExaCustomer"
                         }
                     }
@@ -835,7 +816,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.ExaCustomer"
                         }
                     }
@@ -872,7 +852,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.ExaCustomer"
                         }
                     }
@@ -911,7 +890,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.PageInfo"
                         }
                     }
@@ -983,7 +961,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.ExaFileUploadAndDownload"
                         }
                     }
@@ -1058,7 +1035,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.PageInfo"
                         }
                     }
@@ -1196,7 +1172,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.AuthorityIdInfo"
                         }
                     }
@@ -1235,7 +1210,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysBaseMenu"
                         }
                     }
@@ -1274,7 +1248,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.AddMenuAuthorityInfo"
                         }
                     }
@@ -1313,7 +1286,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.GetById"
                         }
                     }
@@ -1352,7 +1324,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.GetById"
                         }
                     }
@@ -1388,7 +1359,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.RegisterAndLoginStruct"
                         }
                     }
@@ -1424,7 +1394,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.RegisterAndLoginStruct"
                         }
                     }
@@ -1463,7 +1432,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.PageInfo"
                         }
                     }
@@ -1502,8 +1470,121 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysBaseMenu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/all/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "获取监控列表",
+                "parameters": [
+                    {
+                        "description": "获取监控列表",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AllDetailListReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/monitor/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "获取监控列表",
+                "parameters": [
+                    {
+                        "description": "获取监控列表",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.MonitorListReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/top/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stock"
+                ],
+                "summary": "获取Top列表",
+                "parameters": [
+                    {
+                        "description": "获取Top列表",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.StockTopListReq"
                         }
                     }
                 ],
@@ -1538,7 +1619,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.System"
                         }
                     }
@@ -1598,7 +1678,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.System"
                         }
                     }
@@ -1634,7 +1713,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.ChangePasswordStruct"
                         }
                     }
@@ -1673,8 +1751,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
-                            "$ref": "#/definitions/request.SetUserAuth"
+                            "$ref": "#/definitions/request.GetById"
                         }
                     }
                 ],
@@ -1712,7 +1789,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.PageInfo"
                         }
                     }
@@ -1751,7 +1827,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/request.SetUserAuth"
                         }
                     }
@@ -1825,7 +1900,6 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "object",
                             "$ref": "#/definitions/model.SysWorkflow"
                         }
                     }
@@ -1922,6 +1996,12 @@
             "type": "object",
             "properties": {
                 "accessKey": {
+                    "type": "string"
+                },
+                "bucket": {
+                    "type": "string"
+                },
+                "imgPath": {
                     "type": "string"
                 },
                 "secretKey": {
@@ -2027,6 +2107,9 @@
                 "abbreviation": {
                     "type": "string"
                 },
+                "autoCreateApiToSql": {
+                    "type": "boolean"
+                },
                 "fields": {
                     "type": "array",
                     "items": {
@@ -2083,6 +2166,9 @@
             "type": "object",
             "properties": {
                 "columnName": {
+                    "type": "string"
+                },
+                "fieldDesc": {
                     "type": "string"
                 },
                 "fieldJson": {
@@ -2301,6 +2387,17 @@
                 }
             }
         },
+        "request.AllDetailListReq": {
+            "type": "object",
+            "properties": {
+                "page_num": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                }
+            }
+        },
         "request.AuthorityIdInfo": {
             "type": "object",
             "properties": {
@@ -2356,6 +2453,17 @@
                 }
             }
         },
+        "request.MonitorListReq": {
+            "type": "object",
+            "properties": {
+                "symbol_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "request.PageInfo": {
             "type": "object",
             "properties": {
@@ -2380,6 +2488,26 @@
                     "type": "string"
                 },
                 "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.RegisterStruct": {
+            "type": "object",
+            "properties": {
+                "authorityId": {
+                    "type": "string"
+                },
+                "headerImg": {
+                    "type": "string"
+                },
+                "nickName": {
+                    "type": "string"
+                },
+                "passWord": {
+                    "type": "string"
+                },
+                "userName": {
                     "type": "string"
                 }
             }
@@ -2424,6 +2552,20 @@
                 }
             }
         },
+        "request.StockTopListReq": {
+            "type": "object",
+            "properties": {
+                "capital_end": {
+                    "type": "number"
+                },
+                "capital_start": {
+                    "type": "number"
+                },
+                "data_size": {
+                    "type": "integer"
+                }
+            }
+        },
         "response.SysAuthorityCopyResponse": {
             "type": "object",
             "properties": {
@@ -2432,7 +2574,7 @@
                     "$ref": "#/definitions/model.SysAuthority"
                 },
                 "oldAuthorityId": {
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         }

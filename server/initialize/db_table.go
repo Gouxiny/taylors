@@ -1,6 +1,7 @@
 package initialize
 
 import (
+	"gin-vue-admin/dao"
 	"gin-vue-admin/global"
 	"gin-vue-admin/model"
 )
@@ -19,6 +20,9 @@ func DBTables() {
 		model.ExaFile{},
 		model.ExaFileChunk{},
 		model.ExaCustomer{},
+		model.Stock{},
 	)
+	global.GVA_DB.Model(&model.Stock{}).AddIndex("base_index", "symbol", "name", "exchange", "code")
+	dao.Init()
 	global.GVA_LOG.Debug("register table success")
 }

@@ -1,4 +1,4 @@
-package crawler_client
+package crawler
 
 import (
 	"google.golang.org/grpc"
@@ -9,9 +9,9 @@ var Grpc_cli taylors_stock.ServiceClient
 
 func init() {
 	// 建立连接到gRPC服务
-	conn, err := grpc.Dial(basics.Conf.CrawlerAddr, grpc.WithInsecure())
+	conn, err := grpc.Dial("127.0.0.1:8888", grpc.WithInsecure())
 	if err != nil {
-		logger.Logger.Errorln("did not connect: %v", err)
+		panic(err)
 	}
 	// 函数结束时关闭连接
 	//defer conn.Close()

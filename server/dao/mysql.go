@@ -2,6 +2,6 @@ package dao
 
 var StockDao *newStock
 
-func init() {
+func Init() {
 	StockDao = newStockDao()
 }

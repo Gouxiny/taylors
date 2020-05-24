@@ -9,3 +9,8 @@ type StockTopListReq struct {
 type MonitorListReq struct {
 	SymbolList []string `json:"symbol_list" desc:"编码" `
 }
+
+type AllDetailListReq struct {
+	PageNum  int `json:"page_num" desc:"页数" `
+	PageSize int `json:"page_size" desc:"每页数量" `
+}

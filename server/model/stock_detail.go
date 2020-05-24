@@ -1,12 +1,7 @@
 // 自动生成模板Stock
 package model
 
-import (
-	"github.com/jinzhu/gorm"
-)
-
 type Stock struct {
-	gorm.Model
 	Id                 int64   `gorm:"column:id;primary_key;AUTO_INCREMENT"`
 	Symbol             string  `gorm:"column:symbol"`               //编码
 	Name               string  `gorm:"column:name"`                 //名称
@@ -28,6 +23,7 @@ type Stock struct {
 	Volume             int     `gorm:"column:volume"`               //成交量
 	Amount             float64 `gorm:"column:amount"`               //成交额
 	Percent            float64 `gorm:"column:percent"`              //实时涨幅
+	VolumeRatio        float64 `gorm:"volume_ratio"`                //量比
 	Time               int64   `gorm:"column:time"`                 //时间
 	CreateTime         int64   `gorm:"column:createTime"`           //数据创建时间
 }
