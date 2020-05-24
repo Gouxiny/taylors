@@ -3,10 +3,10 @@ package utils
 import (
 	"context"
 	"fmt"
-	"gin-vue-admin/global"
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
 	"mime/multipart"
+	"taylors/global"
 	"time"
 )
 

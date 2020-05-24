@@ -2,13 +2,13 @@ package middleware
 
 import (
 	"errors"
-	"gin-vue-admin/global"
-	"gin-vue-admin/global/response"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
-	"gin-vue-admin/service"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"taylors/global"
+	"taylors/global/response"
+	"taylors/model"
+	"taylors/model/request"
+	"taylors/service"
 	"time"
 )
 

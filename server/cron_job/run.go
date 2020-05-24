@@ -2,13 +2,24 @@ package cron_job
 
 import (
 	"github.com/robfig/cron/v3"
+	"taylors/global"
 )
 
-func Run() {
-	c := cron.New()
-	_, err := c.AddJob("30 23 * * ?", AllJob)
+var cronObj *cron.Cron
+
+func init() {
+	cronObj = cron.New()
+}
+
+func Start() {
+	_, err := cronObj.AddJob(global.GVA_CONFIG.Cron.SpecAll, AllJob)
 	if err != nil {
-		panic(err)
+		global.GVA_LOG.Error("添加定时任务失败:", err)
+		return
 	}
-	c.Start()
+	cronObj.Start()
+}
+
+func Stop() {
+	cronObj.Stop()
 }

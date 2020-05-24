@@ -1,7 +1,7 @@
 package service
 
 import (
-	"gin-vue-admin/model"
+	"taylors/model"
 	"taylors_proto/taylors_stock"
 	"time"
 )
@@ -16,7 +16,7 @@ var _OverTime = time.Second * 10
 func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 	for _, top := range gstocks {
 		stockList = append(stockList, model.Stock{
-			Symbol:             top.Symbol,
+			Symbol:             top.Symbol + "-" + top.Name,
 			Name:               top.Name,
 			Exchange:           top.Exchange,
 			Code:               top.Code,

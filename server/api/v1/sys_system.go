@@ -2,11 +2,11 @@ package v1
 
 import (
 	"fmt"
-	"gin-vue-admin/global/response"
-	"gin-vue-admin/model"
-	resp "gin-vue-admin/model/response"
-	"gin-vue-admin/service"
 	"github.com/gin-gonic/gin"
+	"taylors/global/response"
+	"taylors/model"
+	resp "taylors/model/response"
+	"taylors/service"
 )
 
 // @Tags system

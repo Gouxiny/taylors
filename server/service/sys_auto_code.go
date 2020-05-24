@@ -1,9 +1,9 @@
 package service
 
 import (
-	"gin-vue-admin/model"
-	"gin-vue-admin/utils"
 	"os"
+	"taylors/model"
+	"taylors/utils"
 	"text/template"
 )
 

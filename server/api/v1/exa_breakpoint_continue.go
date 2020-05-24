@@ -2,14 +2,14 @@ package v1
 
 import (
 	"fmt"
-	"gin-vue-admin/global/response"
-	_ "gin-vue-admin/model/response"
-	resp "gin-vue-admin/model/response"
-	"gin-vue-admin/service"
-	"gin-vue-admin/utils"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"strconv"
+	"taylors/global/response"
+	_ "taylors/model/response"
+	resp "taylors/model/response"
+	"taylors/service"
+	"taylors/utils"
 )
 
 // @Tags ExaFileUploadAndDownload

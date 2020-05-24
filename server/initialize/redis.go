@@ -1,8 +1,8 @@
 package initialize
 
 import (
-	"gin-vue-admin/global"
 	"github.com/go-redis/redis"
+	"taylors/global"
 )
 
 func Redis() {

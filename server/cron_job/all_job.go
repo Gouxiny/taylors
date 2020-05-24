@@ -1,9 +1,9 @@
 package cron_job
 
 import (
-	"gin-vue-admin/dao"
-	"gin-vue-admin/model"
-	"gin-vue-admin/service"
+	"taylors/dao"
+	"taylors/model"
+	"taylors/service"
 	"time"
 )
 

@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"gin-vue-admin/model"
-	"gin-vue-admin/module/crawler"
+	"taylors/model"
+	"taylors/module/crawler"
 	"taylors_proto/taylors_stock"
 )
 

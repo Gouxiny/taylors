@@ -1,13 +1,13 @@
 package initialize
 
 import (
-	_ "gin-vue-admin/docs"
-	"gin-vue-admin/global"
-	"gin-vue-admin/middleware"
-	"gin-vue-admin/router"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	_ "taylors/docs"
+	"taylors/global"
+	"taylors/middleware"
+	"taylors/router"
 )
 
 //初始化总路由

@@ -2,19 +2,19 @@ package v1
 
 import (
 	"fmt"
-	"gin-vue-admin/global"
-	"gin-vue-admin/global/response"
-	"gin-vue-admin/middleware"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
-	resp "gin-vue-admin/model/response"
-	"gin-vue-admin/service"
-	"gin-vue-admin/utils"
 	"github.com/dchest/captcha"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"mime/multipart"
+	"taylors/global"
+	"taylors/global/response"
+	"taylors/middleware"
+	"taylors/model"
+	"taylors/model/request"
+	resp "taylors/model/response"
+	"taylors/service"
+	"taylors/utils"
 	"time"
 )
 

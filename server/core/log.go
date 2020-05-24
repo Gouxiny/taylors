@@ -2,14 +2,14 @@ package core
 
 import (
 	"fmt"
-	"gin-vue-admin/config"
-	"gin-vue-admin/global"
-	"gin-vue-admin/utils"
 	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
 	oplogging "github.com/op/go-logging"
 	"io"
 	"os"
 	"strings"
+	"taylors/config"
+	"taylors/global"
+	"taylors/utils"
 	"time"
 )
 

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
+	"taylors/global"
+	"taylors/model"
+	"taylors/model/request"
 )
 
 // @title    Upload

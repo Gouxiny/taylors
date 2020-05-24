@@ -1,9 +1,9 @@
 package initialize
 
 import (
-	"gin-vue-admin/dao"
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
+	"taylors/dao"
+	"taylors/global"
+	"taylors/model"
 )
 
 //注册数据库表专用

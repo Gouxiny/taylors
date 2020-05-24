@@ -2,13 +2,13 @@ package service
 
 import (
 	"errors"
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
 	"github.com/casbin/casbin"
 	"github.com/casbin/casbin/util"
 	gormadapter "github.com/casbin/gorm-adapter"
 	"strings"
+	"taylors/global"
+	"taylors/model"
+	"taylors/model/request"
 )
 
 // @title    UpdateCasbin

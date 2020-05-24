@@ -3,11 +3,11 @@ package utils
 import (
 	"bytes"
 	"fmt"
-	"gin-vue-admin/global"
 	"github.com/dchest/captcha"
 	"net/http"
 	"path"
 	"strings"
+	"taylors/global"
 	"time"
 )
 

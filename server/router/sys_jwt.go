@@ -1,9 +1,9 @@
 package router
 
 import (
-	"gin-vue-admin/api/v1"
-	"gin-vue-admin/middleware"
 	"github.com/gin-gonic/gin"
+	"taylors/api/v1"
+	"taylors/middleware"
 )
 
 func InitJwtRouter(Router *gin.RouterGroup) {

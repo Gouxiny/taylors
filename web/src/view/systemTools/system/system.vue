@@ -95,9 +95,17 @@
       <el-form-item label="logFile">
         <el-checkbox v-model="config.log.logFile"></el-checkbox>
       </el-form-item>
+      <h2>服务配置</h2>
+      <el-form-item label="crawler">
+        <el-input v-model="config.module.crawler"></el-input>
+      </el-form-item>
+      <h2>定时任务配置</h2>
+      <el-form-item label="spec_all">
+        <el-input v-model="config.cron.spec_all"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button @click="update" type="primary">立即更新</el-button>
-        <el-button @click="reload" type="primary">重启服务（开发中）</el-button>
+<!--        <el-button @click="reload" type="primary">重启服务（开发中）</el-button>-->
       </el-form-item>
     </el-form>
   </div>
@@ -118,7 +126,9 @@ export default {
         redis: {},
         qiniu: {},
         captcha:{},
-        log:{}
+        log:{},
+        module:{},
+        cron:{}
       }
     }
   },

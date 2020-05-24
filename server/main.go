@@ -1,10 +1,9 @@
 package main
 
 import (
-	"gin-vue-admin/core"
-	"gin-vue-admin/cron_job"
-	"gin-vue-admin/global"
-	"gin-vue-admin/initialize"
+	"taylors/core"
+	"taylors/global"
+	"taylors/initialize"
 	//"runtime"
 )
 
@@ -21,8 +20,11 @@ func main() {
 		initialize.Mysql()
 	}
 	initialize.DBTables()
+
 	// 程序结束前关闭数据库链接
-	defer global.GVA_DB.Close()
-	cron_job.Run()
+	defer func() {
+		_ = global.GVA_DB.Close()
+	}()
+
 	core.RunWindowsServer()
 }

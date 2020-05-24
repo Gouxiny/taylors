@@ -1,12 +1,12 @@
 package v1
 
 import (
-	"gin-vue-admin/global"
-	"gin-vue-admin/global/response"
-	resp "gin-vue-admin/model/response"
-	"gin-vue-admin/utils"
 	"github.com/dchest/captcha"
 	"github.com/gin-gonic/gin"
+	"taylors/global"
+	"taylors/global/response"
+	resp "taylors/model/response"
+	"taylors/utils"
 )
 
 // @Tags base

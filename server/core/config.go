@@ -2,9 +2,10 @@ package core
 
 import (
 	"fmt"
-	"gin-vue-admin/global"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
+	"taylors/cron_job"
+	"taylors/global"
 )
 
 const defaultConfigFile = "config.yaml"
@@ -23,6 +24,10 @@ func init() {
 		if err := v.Unmarshal(&global.GVA_CONFIG); err != nil {
 			fmt.Println(err)
 		}
+
+		//监听配置文件
+		cron_job.Stop()
+		cron_job.Start()
 	})
 	if err := v.Unmarshal(&global.GVA_CONFIG); err != nil {
 		fmt.Println(err)

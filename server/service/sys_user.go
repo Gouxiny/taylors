@@ -2,11 +2,11 @@ package service
 
 import (
 	"errors"
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
-	"gin-vue-admin/utils"
 	uuid "github.com/satori/go.uuid"
+	"taylors/global"
+	"taylors/model"
+	"taylors/model/request"
+	"taylors/utils"
 )
 
 // @title    Register

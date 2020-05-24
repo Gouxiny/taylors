@@ -1,9 +1,9 @@
 package dao
 
 import (
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
 	"github.com/jinzhu/gorm"
+	"taylors/global"
+	"taylors/model"
 )
 
 type newStock struct {

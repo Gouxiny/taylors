@@ -2,11 +2,11 @@ package v1
 
 import (
 	"fmt"
-    "gin-vue-admin/global/response"
-    "gin-vue-admin/model"
-    "gin-vue-admin/model/request"
-    resp "gin-vue-admin/model/response"
-    "gin-vue-admin/service"
+    "taylors/global/response"
+    "taylors/model"
+    "taylors/model/request"
+    resp "taylors/model/response"
+    "taylors/service"
     "github.com/gin-gonic/gin"
 )
 

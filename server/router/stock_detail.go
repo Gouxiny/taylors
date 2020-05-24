@@ -1,9 +1,9 @@
 package router
 
 import (
-	v1 "gin-vue-admin/api/v1"
-	"gin-vue-admin/middleware"
 	"github.com/gin-gonic/gin"
+	v1 "taylors/api/v1"
+	"taylors/middleware"
 )
 
 func InitStockRouter(Router *gin.RouterGroup) {

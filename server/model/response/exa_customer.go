@@ -1,6 +1,6 @@
 package response
 
-import "gin-vue-admin/model"
+import "taylors/model"
 
 type ExaCustomerResponse struct {
 	Customer model.ExaCustomer `json:"customer"`

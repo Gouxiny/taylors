@@ -2,11 +2,11 @@ package service
 
 import (
 	"errors"
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
-	"gin-vue-admin/model/request"
-	"gin-vue-admin/model/response"
 	"strconv"
+	"taylors/global"
+	"taylors/model"
+	"taylors/model/request"
+	"taylors/model/response"
 )
 
 // @title    CreateAuthority

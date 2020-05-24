@@ -1,8 +1,8 @@
 package service
 
 import (
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
+	"taylors/global"
+	"taylors/model"
 )
 
 // @title         FindOrCreateFile

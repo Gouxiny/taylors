@@ -2,9 +2,9 @@ package service
 
 import (
 	"errors"
-	"gin-vue-admin/global"
-	"gin-vue-admin/model"
 	"strconv"
+	"taylors/global"
+	"taylors/model"
 )
 
 // @title   getMenuTreeMap
