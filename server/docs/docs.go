@@ -1516,10 +1516,10 @@ var doc = `{
                 "tags": [
                     "Stock"
                 ],
-                "summary": "获取监控列表",
+                "summary": "获取所有列表",
                 "parameters": [
                     {
-                        "description": "获取监控列表",
+                        "description": "获取所有列表",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -1531,6 +1531,82 @@ var doc = `{
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/monitor/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "StockMonitor"
+                ],
+                "summary": "添加监控",
+                "parameters": [
+                    {
+                        "description": "添加监控",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.AddMonitorReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"添加监控成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/monitor/del": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "StockMonitor"
+                ],
+                "summary": "删除监控",
+                "parameters": [
+                    {
+                        "description": "删除监控",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.DelMonitorReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除监控成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1552,23 +1628,88 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Stock"
+                    "StockMonitor"
                 ],
                 "summary": "获取监控列表",
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/monitor/one": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "StockMonitor"
+                ],
+                "summary": "获取监控",
                 "parameters": [
                     {
-                        "description": "获取监控列表",
+                        "description": "获取监控",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.MonitorListReq"
+                            "$ref": "#/definitions/request.MonitorOneReq"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stock/monitor/update": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "StockMonitor"
+                ],
+                "summary": "更新监控",
+                "parameters": [
+                    {
+                        "description": "更新监控",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.UpdateMonitorReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新监控成功\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1954,6 +2095,14 @@ var doc = `{
                 }
             }
         },
+        "config.Cron": {
+            "type": "object",
+            "properties": {
+                "spec_all": {
+                    "type": "string"
+                }
+            }
+        },
         "config.JWT": {
             "type": "object",
             "properties": {
@@ -1975,6 +2124,14 @@ var doc = `{
                     "type": "string"
                 },
                 "stdout": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.Module": {
+            "type": "object",
+            "properties": {
+                "crawler": {
                     "type": "string"
                 }
             }
@@ -2050,6 +2207,10 @@ var doc = `{
                     "type": "object",
                     "$ref": "#/definitions/config.Casbin"
                 },
+                "cron": {
+                    "type": "object",
+                    "$ref": "#/definitions/config.Cron"
+                },
                 "jwt": {
                     "type": "object",
                     "$ref": "#/definitions/config.JWT"
@@ -2057,6 +2218,10 @@ var doc = `{
                 "log": {
                     "type": "object",
                     "$ref": "#/definitions/config.Log"
+                },
+                "module": {
+                    "type": "object",
+                    "$ref": "#/definitions/config.Module"
                 },
                 "mysql": {
                     "type": "object",
@@ -2403,6 +2568,20 @@ var doc = `{
                 }
             }
         },
+        "request.AddMonitorReq": {
+            "type": "object",
+            "properties": {
+                "monitor_high": {
+                    "type": "number"
+                },
+                "monitor_low": {
+                    "type": "number"
+                },
+                "symbol": {
+                    "type": "string"
+                }
+            }
+        },
         "request.AllDetailListReq": {
             "type": "object",
             "properties": {
@@ -2461,6 +2640,14 @@ var doc = `{
                 }
             }
         },
+        "request.DelMonitorReq": {
+            "type": "object",
+            "properties": {
+                "symbol": {
+                    "type": "string"
+                }
+            }
+        },
         "request.GetById": {
             "type": "object",
             "properties": {
@@ -2469,14 +2656,11 @@ var doc = `{
                 }
             }
         },
-        "request.MonitorListReq": {
+        "request.MonitorOneReq": {
             "type": "object",
             "properties": {
-                "symbol_list": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                "symbol": {
+                    "type": "string"
                 }
             }
         },
@@ -2571,14 +2755,37 @@ var doc = `{
         "request.StockTopListReq": {
             "type": "object",
             "properties": {
-                "capital_end": {
+                "marketCapitalMax": {
                     "type": "number"
                 },
-                "capital_start": {
+                "marketCapitalMin": {
                     "type": "number"
                 },
-                "data_size": {
+                "percentMax": {
+                    "type": "number"
+                },
+                "percentMin": {
+                    "type": "number"
+                },
+                "volume_ratio_max": {
+                    "type": "number"
+                },
+                "volume_ratio_min": {
+                    "type": "number"
+                }
+            }
+        },
+        "request.UpdateMonitorReq": {
+            "type": "object",
+            "properties": {
+                "id": {
                     "type": "integer"
+                },
+                "monitor_high": {
+                    "type": "number"
+                },
+                "monitor_low": {
+                    "type": "number"
                 }
             }
         },

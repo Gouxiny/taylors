@@ -27,27 +27,27 @@ func (*stockCommonService) HistoryList(code string) (stockList []model.Stock, er
 	return
 }
 
-func (*stockCommonService) CodeDetail(codes []string) (stockList []model.Stock, err error) {
+func (*stockCommonService) SymbolDetail(symbols []string) (stockList []model.Stock, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), _OverTime)
 	defer cancel()
 
-	req := &taylors_stock.CodeDetailReq{
-		Code: codes,
+	req := &taylors_stock.SymbolDetailReq{
+		Symbols: symbols,
 	}
 
-	historyListRsp, err := crawler.Grpc_cli.CodeDetail(ctx, req)
+	SymbolDetailListRsp, err := crawler.Grpc_cli.SymbolDetail(ctx, req)
 	if err != nil {
 		return
 	}
 
-	stockList = Conv(historyListRsp.StockList)
+	stockList = Conv(SymbolDetailListRsp.StockList)
 	return
 }
 
 func (srv *stockCommonService) CheckOffday() (offday bool) {
-	codes := []string{"SZ000001"}
+	symbols := []string{"SZ000001"}
 
-	stockList, err := srv.CodeDetail(codes)
+	stockList, err := srv.SymbolDetail(symbols)
 	if err != nil {
 		return
 	}

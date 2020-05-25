@@ -21,8 +21,3 @@ func (*stockAllService) AllDetailList(pageNum, pageSize int) (stockList []model.
 	stockList = Conv(allListRsp.StockList)
 	return
 }
-
-func (*stockAllService) CheckOffday() (offday bool) {
-
-	return
-}

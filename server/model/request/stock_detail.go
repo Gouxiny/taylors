@@ -9,11 +9,27 @@ type StockTopListReq struct {
 	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
 }
 
-type MonitorListReq struct {
-	SymbolList []string `json:"symbol_list" desc:"编码" `
-}
-
 type AllDetailListReq struct {
 	PageNum  int `json:"page_num" desc:"页数" `
 	PageSize int `json:"page_size" desc:"每页数量" `
+}
+
+type MonitorOneReq struct {
+	Symbol string `json:"symbol" desc:"编码" `
+}
+
+type AddMonitorReq struct {
+	Symbol      string  `json:"symbol" desc:"编码" `
+	MonitorHigh float64 `json:"monitor_high" desc:"高位预警" `
+	MonitorLow  float64 `json:"monitor_low" desc:"低位预警" `
+}
+
+type DelMonitorReq struct {
+	Symbol string `json:"symbol" desc:"编码" `
+}
+
+type UpdateMonitorReq struct {
+	Id          int64   `json:"id" desc:"key" `
+	MonitorHigh float64 `json:"monitor_high" desc:"高位预警" `
+	MonitorLow  float64 `json:"monitor_low" desc:"低位预警" `
 }

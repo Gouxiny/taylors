@@ -1,7 +1,9 @@
 package dao
 
-var StockDao *newStock
+var StockDao *stockModel
+var StockMonitorDao *stockMonitorModel
 
 func Init() {
 	StockDao = newStockDao()
+	StockMonitorDao = newStockMonitorDao()
 }

@@ -14,6 +14,11 @@ definitions:
       modelPath:
         type: string
     type: object
+  config.Cron:
+    properties:
+      spec_all:
+        type: string
+    type: object
   config.JWT:
     properties:
       signingKey:
@@ -28,6 +33,11 @@ definitions:
       prefix:
         type: string
       stdout:
+        type: string
+    type: object
+  config.Module:
+    properties:
+      crawler:
         type: string
     type: object
   config.Mysql:
@@ -77,11 +87,17 @@ definitions:
       casbin:
         $ref: '#/definitions/config.Casbin'
         type: object
+      cron:
+        $ref: '#/definitions/config.Cron'
+        type: object
       jwt:
         $ref: '#/definitions/config.JWT'
         type: object
       log:
         $ref: '#/definitions/config.Log'
+        type: object
+      module:
+        $ref: '#/definitions/config.Module'
         type: object
       mysql:
         $ref: '#/definitions/config.Mysql'
@@ -314,6 +330,15 @@ definitions:
           $ref: '#/definitions/model.SysBaseMenu'
         type: array
     type: object
+  request.AddMonitorReq:
+    properties:
+      monitor_high:
+        type: number
+      monitor_low:
+        type: number
+      symbol:
+        type: string
+    type: object
   request.AllDetailListReq:
     properties:
       page_num:
@@ -351,17 +376,20 @@ definitions:
       username:
         type: string
     type: object
+  request.DelMonitorReq:
+    properties:
+      symbol:
+        type: string
+    type: object
   request.GetById:
     properties:
       id:
         type: number
     type: object
-  request.MonitorListReq:
+  request.MonitorOneReq:
     properties:
-      symbol_list:
-        items:
-          type: string
-        type: array
+      symbol:
+        type: string
     type: object
   request.PageInfo:
     properties:
@@ -422,12 +450,27 @@ definitions:
     type: object
   request.StockTopListReq:
     properties:
-      capital_end:
+      marketCapitalMax:
         type: number
-      capital_start:
+      marketCapitalMin:
         type: number
-      data_size:
+      percentMax:
+        type: number
+      percentMin:
+        type: number
+      volume_ratio_max:
+        type: number
+      volume_ratio_min:
+        type: number
+    type: object
+  request.UpdateMonitorReq:
+    properties:
+      id:
         type: integer
+      monitor_high:
+        type: number
+      monitor_low:
+        type: number
     type: object
   response.SysAuthorityCopyResponse:
     properties:
@@ -1343,7 +1386,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: 获取监控列表
+      - description: 获取所有列表
         in: body
         name: data
         required: true
@@ -1358,20 +1401,59 @@ paths:
             type: string
       security:
       - ApiKeyAuth: []
-      summary: 获取监控列表
+      summary: 获取所有列表
       tags:
       - Stock
-  /stock/monitor/list:
+  /stock/monitor/add:
     post:
       consumes:
       - application/json
       parameters:
-      - description: 获取监控列表
+      - description: 添加监控
         in: body
         name: data
         required: true
         schema:
-          $ref: '#/definitions/request.MonitorListReq'
+          $ref: '#/definitions/request.AddMonitorReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"添加监控成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 添加监控
+      tags:
+      - StockMonitor
+  /stock/monitor/del:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 删除监控
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.DelMonitorReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"删除监控成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除监控
+      tags:
+      - StockMonitor
+  /stock/monitor/list:
+    post:
+      consumes:
+      - application/json
       produces:
       - application/json
       responses:
@@ -1383,7 +1465,53 @@ paths:
       - ApiKeyAuth: []
       summary: 获取监控列表
       tags:
-      - Stock
+      - StockMonitor
+  /stock/monitor/one:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取监控
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.MonitorOneReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取监控
+      tags:
+      - StockMonitor
+  /stock/monitor/update:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 更新监控
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateMonitorReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"更新监控成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新监控
+      tags:
+      - StockMonitor
   /stock/top/list:
     post:
       consumes:

@@ -21,8 +21,8 @@ func DBTables() {
 		model.ExaFileChunk{},
 		model.ExaCustomer{},
 		model.Stock{},
+		model.StockMonitor{},
 	)
-	global.GVA_DB.Model(&model.Stock{}).AddIndex("base_index", "symbol", "name", "exchange", "code")
 	dao.Init()
 	global.GVA_LOG.Debug("register table success")
 }

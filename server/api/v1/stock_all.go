@@ -12,11 +12,11 @@ import (
 type stockAll int
 
 // @Tags Stock
-// @Summary 获取监控列表
+// @Summary 获取所有列表
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.AllDetailListReq true "获取监控列表"
+// @Param data body request.AllDetailListReq true "获取所有列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /stock/all/list [post]
 func (*stockAll) StockAllDetailList(c *gin.Context) {

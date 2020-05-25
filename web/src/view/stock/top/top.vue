@@ -53,8 +53,8 @@
 <!--      <el-table-column label="涨停" min-width="80" prop="high" sortable></el-table-column>
       <el-table-column label="跌停" min-width="80" prop="limit_down" sortable></el-table-column>-->
 
-      <el-table-column label="最高" min-width="80" prop="chg" sortable></el-table-column>
-      <el-table-column label="最低" min-width="80" prop="low" sortable></el-table-column>
+<!--      <el-table-column label="最高" min-width="80" prop="chg" sortable></el-table-column>
+      <el-table-column label="最低" min-width="80" prop="low" sortable></el-table-column>-->
 
       <el-table-column label="成交量" min-width="120" prop="volume" sortable></el-table-column>
       <el-table-column label="成交额" min-width="120" prop="amount" sortable></el-table-column>
