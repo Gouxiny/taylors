@@ -17,8 +17,8 @@ module:
   crawler: 127.0.0.1:8888
 mysql:
   username: root
-  password: password
-  path: 192.168.243.131:3306
+  password: 123456
+  path: 192.168.1.97:3306
   db-name: taylors
   config: charset=utf8&parseTime=True&loc=Local
   max-idle-conns: 10
@@ -30,7 +30,7 @@ qiniu:
   bucket: qm-plus-img
   img-path: http://qmplusimg.henrongyi.top
 redis:
-  addr: 192.168.234.131:6379
+  addr: 192.168.1.97:6379
   password: ""
   db: 0
 sqlite:
@@ -40,7 +40,7 @@ sqlite:
   config: loc=Asia/Shanghai
   log-mode: true
 system:
-  use-multipoint: false
+  use-multipoint: true
   env: public
   addr: 9999
   db-type: mysql

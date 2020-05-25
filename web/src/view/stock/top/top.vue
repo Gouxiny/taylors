@@ -5,36 +5,36 @@
           <el-row>
             <el-col :span="5">
               <el-form-item label="市值">
-                <el-input placeholder="最小" type="number" v-model="searchInfo.marketCapitalMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+                <el-input-number placeholder="最小" v-model="searchInfo.marketCapitalMin" :controls="false"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item label="">
-                <el-input placeholder="最大" type="number" v-model="searchInfo.marketCapitalMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+                <el-input-number placeholder="最大"  v-model="searchInfo.marketCapitalMax" :controls="false"></el-input-number>
               </el-form-item>
             </el-col>
           </el-row>
         <el-row>
           <el-col :span="5">
             <el-form-item label="涨幅">
-              <el-input placeholder="最小" type="number" v-model="searchInfo.percentMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              <el-input-number placeholder="最小"  v-model="searchInfo.percentMin" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input placeholder="最大" type="number" v-model="searchInfo.percentMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              <el-input-number placeholder="最大"  v-model="searchInfo.percentMax" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="5">
             <el-form-item label="量比">
-              <el-input placeholder="最小" type="number" v-model="searchInfo.volume_ratio_min" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              <el-input-number placeholder="最小"  v-model="searchInfo.volume_ratio_min" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input placeholder="最大" type="number" v-model="searchInfo.volume_ratio_max" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              <el-input-number placeholder="最大"  v-model="searchInfo.volume_ratio_max" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
@@ -90,23 +90,14 @@
     methods: {
       //搜索
       onSubmit() {
-        this.tableList()
-        setInterval(()=>{
-          this.tableList()
-        },20000)
-      },
-      tableList(){
-        this.searchInfo.marketCapitalMin = parseFloat(this.searchInfo.marketCapitalMin)
-        this.searchInfo.marketCapitalMax = parseFloat(this.searchInfo.marketCapitalMax)
-        this.searchInfo.percentMin = parseFloat(this.searchInfo.percentMin)
-        this.searchInfo.percentMax = parseFloat(this.searchInfo.percentMax)
-        this.searchInfo.volume_ratio_min = parseFloat(this.searchInfo.volume_ratio_min)
-        this.searchInfo.volume_ratio_max = parseFloat(this.searchInfo.volume_ratio_max)
         this.getTableData()
+        setInterval(()=>{
+          this.getTableData()
+        },10000)
       }
     },
     created(){
-      this.tableList()
+      this.getTableData()
     }
   }
 </script>
