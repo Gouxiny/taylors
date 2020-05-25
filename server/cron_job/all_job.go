@@ -22,6 +22,10 @@ func (job *allJob) Run() {
 		recover()
 	}()
 
+	if service.StockCommonService.CheckOffday() { // 判断是否是休市日
+		return
+	}
+
 	stockList, err := service.StockAllService.AllDetailList(1, 100000)
 	if err != nil {
 		return

@@ -25,5 +25,5 @@ type Stock struct {
 	Percent            float64 `gorm:"column:percent" json:"percent"`                           //实时涨幅
 	VolumeRatio        float64 `gorm:"volume_ratio" json:"volume_ratio"`                        //量比
 	Time               int64   `gorm:"column:time" json:"time"`                                 //时间
-	CreateTime         int64   `gorm:"column:createTime" json:"create_time"`                    //数据创建时间
+	CreateTime         int64   `gorm:"column:create_time" json:"create_time"`                   //数据创建时间
 }

@@ -20,6 +20,11 @@ func (dao *newStock) Save(stock model.Stock) (err error) {
 	return
 }
 
+func (dao *newStock) FindBySymbol(symbol string) (stockList []*model.Stock, err error) {
+	err = dao.Db.Where("symbol = ? ", symbol).Order("create_time desc").Find(&stockList).Error
+	return
+}
+
 func (dao *newStock) Max() (maxId int64, err error) {
 	type C struct {
 		MaxId int64 `gorm:"column:max_id"`
