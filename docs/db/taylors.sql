@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 26/05/2020 13:37:03
+ Date: 26/05/2020 14:01:47
 */
 
 SET NAMES utf8mb4;
@@ -162,6 +162,23 @@ INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/add', 'POST', '', 
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/one', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/del', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/update', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/base/login', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/base/register', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/getMenu', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/getMenuList', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/getBaseMenuTree', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/addMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/getMenuAuthority', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/menu/getBaseMenuById', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/user/changePassword', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/user/uploadHeaderImg', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/jwt/jsonInBlacklist', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/top/list', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/monitor/list', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/monitor/add', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/monitor/one', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/monitor/del', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', 'stock', '/stock/monitor/update', 'POST', '', '', '');
 
 -- ----------------------------
 -- Table structure for exa_customers
@@ -258,7 +275,7 @@ CREATE TABLE `jwt_blacklists`  (
   `jwt` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_jwt_blacklists_deleted_at`(`deleted_at`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of jwt_blacklists
@@ -309,6 +326,12 @@ INSERT INTO `jwt_blacklists` VALUES (45, '2020-04-15 17:12:54', '2020-04-15 17:1
 INSERT INTO `jwt_blacklists` VALUES (46, '2020-04-15 17:14:47', '2020-04-15 17:14:47', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTg3NTQ2Nzg5LCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1ODY5NDA5ODl9.3jbdl1N0KA8ExFMWXHi3ha4aESKq8yDKDgpSH4Xdsnk');
 INSERT INTO `jwt_blacklists` VALUES (47, '2020-04-22 12:04:20', '2020-04-22 12:04:20', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTg3NjE2MTYwLCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1ODcwMTAzNjB9.jRHlnfXuJhp4hBE-QqCZ-lodzwK67IBkDI2xteB0OQw');
 INSERT INTO `jwt_blacklists` VALUES (48, '2020-04-22 12:12:17', '2020-04-22 12:12:17', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTg4MTMzMjQyLCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1ODc1Mjc0NDJ9.WJ59uRUxXJ7-rUH07mE6jCfnwgfvQnpPaLU5vJ_VhWM');
+INSERT INTO `jwt_blacklists` VALUES (49, '2020-05-26 13:47:57', '2020-05-26 13:47:57', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTkwNzM5NzA2LCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1OTAxMzM5MDZ9.qLOiJZNi0BzUsfVf-RXlxKuSvKdiCzujj4U1MjBLIMo');
+INSERT INTO `jwt_blacklists` VALUES (50, '2020-05-26 13:50:17', '2020-05-26 13:50:17', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTkxMDc2OTYyLCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1OTA0NzExNjJ9.DzDQLh3rcR2Q1SDFhgyldwxvmiM5pfWQXEJQznwKKCo');
+INSERT INTO `jwt_blacklists` VALUES (51, '2020-05-26 13:56:21', '2020-05-26 13:56:21', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTkxMDc3MzA3LCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1OTA0NzE1MDd9.EN12QfW7pyQgSXH3hEyqK0xE2RG5gq-h-gb88ryI8GE');
+INSERT INTO `jwt_blacklists` VALUES (52, '2020-05-26 13:57:50', '2020-05-26 13:57:50', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTkxMDc3MzkxLCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1OTA0NzE1OTF9.yws3hTfYo1I28yPTbGs3kJunDSwL8onFWQ3XRmHTSo8');
+INSERT INTO `jwt_blacklists` VALUES (53, '2020-05-26 14:01:10', '2020-05-26 14:01:10', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTkxMDc3NjQ5LCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1OTA0NzE4NDl9.bk_5o2it5DrUDowF-gcoT9wN4Lj4mC5PMf-VfCeQjkk');
+INSERT INTO `jwt_blacklists` VALUES (54, '2020-05-26 14:01:33', '2020-05-26 14:01:33', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiYTRiMGY2NjAtM2NhMi00MGViLWJkMjYtNzI4MmEzMGYxMmVjIiwiSUQiOjE0LCJOaWNrTmFtZSI6InpoYW5nanVuIiwiQXV0aG9yaXR5SWQiOiJzdG9jayIsImV4cCI6MTU5MTA3NzY4OCwiaXNzIjoicW1QbHVzIiwibmJmIjoxNTkwNDcxODg4fQ.n_Kqd8fXuKC-09Pk6ArGN2n_QDTXx1sKY3PcjQkCJqQ');
 
 -- ----------------------------
 -- Table structure for stock_monitor
@@ -324,14 +347,17 @@ CREATE TABLE `stock_monitor`  (
   `create_time` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `base_index`(`symbol`, `del_status`, `user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of stock_monitor
 -- ----------------------------
-INSERT INTO `stock_monitor` VALUES (1, 'SH603950', 1, 50, 10, 0, 1590462766);
+INSERT INTO `stock_monitor` VALUES (1, 'SH603950', 1, 50, 10, 1590471852, 1590462766);
 INSERT INTO `stock_monitor` VALUES (2, 'SH688003', 60, 22, 10, 1590470752, 1590462813);
 INSERT INTO `stock_monitor` VALUES (3, 'SZ002400', 90, 22, 10, 1590470747, 1590465041);
+INSERT INTO `stock_monitor` VALUES (4, 'SZ300792', 400, 360, 14, 0, 1590471772);
+INSERT INTO `stock_monitor` VALUES (5, 'SH603605', 170, 150, 14, 0, 1590471819);
+INSERT INTO `stock_monitor` VALUES (6, 'SZ000869', 30, 25, 14, 0, 1590471898);
 
 -- ----------------------------
 -- Table structure for stocks
@@ -462,6 +488,7 @@ CREATE TABLE `sys_authorities`  (
 INSERT INTO `sys_authorities` VALUES ('888', '普通用户', '0', '2020-04-04 11:44:56', '2020-05-09 17:41:29', NULL);
 INSERT INTO `sys_authorities` VALUES ('8881', '普通用户子角色', '888', '2020-04-04 11:44:56', '2020-05-09 17:41:29', NULL);
 INSERT INTO `sys_authorities` VALUES ('9528', '测试角色', '0', '2020-04-04 11:44:56', '2020-05-09 17:41:29', NULL);
+INSERT INTO `sys_authorities` VALUES ('stock', '股票', '0', '2020-05-26 13:46:01', '2020-05-26 13:46:01', NULL);
 
 -- ----------------------------
 -- Table structure for sys_authority_menus
@@ -528,6 +555,11 @@ INSERT INTO `sys_authority_menus` VALUES ('9528', 38);
 INSERT INTO `sys_authority_menus` VALUES ('9528', 40);
 INSERT INTO `sys_authority_menus` VALUES ('9528', 41);
 INSERT INTO `sys_authority_menus` VALUES ('9528', 42);
+INSERT INTO `sys_authority_menus` VALUES ('stock', 1);
+INSERT INTO `sys_authority_menus` VALUES ('stock', 18);
+INSERT INTO `sys_authority_menus` VALUES ('stock', 47);
+INSERT INTO `sys_authority_menus` VALUES ('stock', 48);
+INSERT INTO `sys_authority_menus` VALUES ('stock', 49);
 
 -- ----------------------------
 -- Table structure for sys_base_menus
@@ -636,14 +668,15 @@ CREATE TABLE `sys_users`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_users_deleted_at`(`deleted_at`) USING BTREE,
   INDEX `idx_sys_users_deleted_at`(`deleted_at`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_users
 -- ----------------------------
 INSERT INTO `sys_users` VALUES (10, '2019-09-13 17:23:46', '2020-05-24 16:42:48', NULL, 0x63653064363638352D633135662D343132362D613562342D383930626339643233353664, NULL, NULL, '超级管理员', 'http://qmplusimg.henrongyi.top/15887525450B978439-F04A-4a09-A8D3-DE7DE2677142.png', '888', NULL, 'admin', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL);
 INSERT INTO `sys_users` VALUES (11, '2019-09-13 17:27:29', '2020-05-09 17:43:44', NULL, 0x66643665663739622D393434632D343838382D383337372D616265326432363038383538, NULL, NULL, 'QMPlusUser', 'http://qmplusimg.henrongyi.top/1572075907logo.png', '9528', NULL, 'a303176530', '3ec063004a6f31642261936a379fde3d', NULL, NULL);
-INSERT INTO `sys_users` VALUES (13, '2020-05-24 16:42:35', '2020-05-24 16:42:52', NULL, 0x34353464643334612D353066652D346338382D386461342D303561336666633737393033, NULL, NULL, 'zj', 'http://qmplusimg.henrongyi.top/1590309743timg.jpg', '888', NULL, 'zj', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL);
+INSERT INTO `sys_users` VALUES (13, '2020-05-24 16:42:35', '2020-05-26 13:46:37', '2020-05-26 13:46:45', 0x34353464643334612D353066652D346338382D386461342D303561336666633737393033, NULL, NULL, 'zj', 'http://qmplusimg.henrongyi.top/1590309743timg.jpg', 'stock', NULL, 'zj', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL);
+INSERT INTO `sys_users` VALUES (14, '2020-05-26 13:47:54', '2020-05-26 13:47:54', NULL, 0x61346230663636302D336361322D343065622D626432362D373238326133306631326563, NULL, NULL, 'zhangjun', 'http://qmplusimg.henrongyi.top/1590472067timg.jpg', 'stock', NULL, 'zhangjun', 'cfb70ae5d9a8e90529b4a27a89041d85', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_workflow_step_infos
