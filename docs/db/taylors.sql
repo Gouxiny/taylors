@@ -1,17 +1,17 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : xxx
+ Source Server         : xxxx
  Source Server Type    : MySQL
  Source Server Version : 50719
- Source Host           : 192.168.243.131:3306
+ Source Host           : 192.168.1.97:3306
  Source Schema         : taylors
 
  Target Server Type    : MySQL
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 24/05/2020 16:44:38
+ Date: 26/05/2020 13:37:03
 */
 
 SET NAMES utf8mb4;
@@ -157,6 +157,11 @@ INSERT INTO `casbin_rule` VALUES ('p', '888', '/customer/customer', 'GET', '', '
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/customer/customerList', 'GET', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/autoCode/createTemp', 'POST', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/top/list', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/list', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/add', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/one', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/del', 'POST', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '888', '/stock/monitor/update', 'POST', '', '', '');
 
 -- ----------------------------
 -- Table structure for exa_customers
@@ -306,6 +311,29 @@ INSERT INTO `jwt_blacklists` VALUES (47, '2020-04-22 12:04:20', '2020-04-22 12:0
 INSERT INTO `jwt_blacklists` VALUES (48, '2020-04-22 12:12:17', '2020-04-22 12:12:17', NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiY2UwZDY2ODUtYzE1Zi00MTI2LWE1YjQtODkwYmM5ZDIzNTZkIiwiSUQiOjEwLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjoiODg4IiwiZXhwIjoxNTg4MTMzMjQyLCJpc3MiOiJxbVBsdXMiLCJuYmYiOjE1ODc1Mjc0NDJ9.WJ59uRUxXJ7-rUH07mE6jCfnwgfvQnpPaLU5vJ_VhWM');
 
 -- ----------------------------
+-- Table structure for stock_monitor
+-- ----------------------------
+DROP TABLE IF EXISTS `stock_monitor`;
+CREATE TABLE `stock_monitor`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `symbol` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `monitor_high` double NULL DEFAULT NULL,
+  `monitor_low` double NULL DEFAULT NULL,
+  `user_id` int(10) UNSIGNED NULL DEFAULT NULL,
+  `del_status` bigint(20) NULL DEFAULT NULL,
+  `create_time` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `base_index`(`symbol`, `del_status`, `user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of stock_monitor
+-- ----------------------------
+INSERT INTO `stock_monitor` VALUES (1, 'SH603950', 1, 50, 10, 0, 1590462766);
+INSERT INTO `stock_monitor` VALUES (2, 'SH688003', 60, 22, 10, 1590470752, 1590462813);
+INSERT INTO `stock_monitor` VALUES (3, 'SZ002400', 90, 22, 10, 1590470747, 1590465041);
+
+-- ----------------------------
 -- Table structure for stocks
 -- ----------------------------
 DROP TABLE IF EXISTS `stocks`;
@@ -334,6 +362,8 @@ CREATE TABLE `stocks`  (
   `volume_ratio` double NULL DEFAULT NULL,
   `time` bigint(20) NULL DEFAULT NULL,
   `createTime` bigint(20) NULL DEFAULT NULL,
+  `create_time` bigint(20) NULL DEFAULT NULL,
+  `current` double NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `base_index`(`symbol`, `name`, `exchange`, `code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -355,7 +385,7 @@ CREATE TABLE `sys_apis`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_apis_deleted_at`(`deleted_at`) USING BTREE,
   INDEX `idx_sys_apis_deleted_at`(`deleted_at`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_apis
@@ -404,6 +434,11 @@ INSERT INTO `sys_apis` VALUES (45, '2020-03-29 23:01:28', '2020-03-29 23:01:28',
 INSERT INTO `sys_apis` VALUES (46, '2020-04-15 12:46:58', '2020-04-15 12:46:58', NULL, NULL, '/authority/updateAuthority', '更新角色信息', 'authority', 'PUT');
 INSERT INTO `sys_apis` VALUES (47, '2020-04-20 15:14:25', '2020-04-20 15:14:25', NULL, NULL, '/authority/copyAuthority', '拷贝角色', 'authority', 'POST');
 INSERT INTO `sys_apis` VALUES (48, '2020-05-24 16:33:25', '2020-05-24 16:43:26', NULL, NULL, '/stock/top/list', '获取Top列表', 'stock', 'POST');
+INSERT INTO `sys_apis` VALUES (49, '2020-05-26 10:48:29', '2020-05-26 10:48:29', NULL, NULL, '/stock/monitor/list', '监控列表', 'stock', 'POST');
+INSERT INTO `sys_apis` VALUES (50, '2020-05-26 11:11:36', '2020-05-26 11:11:36', NULL, NULL, '/stock/monitor/add', '新增监控', 'stock', 'POST');
+INSERT INTO `sys_apis` VALUES (51, '2020-05-26 11:46:33', '2020-05-26 11:46:33', NULL, NULL, '/stock/monitor/one', '查询单个监控', 'stock', 'POST');
+INSERT INTO `sys_apis` VALUES (52, '2020-05-26 11:47:01', '2020-05-26 11:47:01', NULL, NULL, '/stock/monitor/del', '删除监控', 'stock', 'POST');
+INSERT INTO `sys_apis` VALUES (53, '2020-05-26 11:47:20', '2020-05-26 11:47:20', NULL, NULL, '/stock/monitor/update', '更新监控', 'stock', 'POST');
 
 -- ----------------------------
 -- Table structure for sys_authorities
@@ -465,6 +500,7 @@ INSERT INTO `sys_authority_menus` VALUES ('888', 42);
 INSERT INTO `sys_authority_menus` VALUES ('888', 45);
 INSERT INTO `sys_authority_menus` VALUES ('888', 47);
 INSERT INTO `sys_authority_menus` VALUES ('888', 48);
+INSERT INTO `sys_authority_menus` VALUES ('888', 49);
 INSERT INTO `sys_authority_menus` VALUES ('8881', 1);
 INSERT INTO `sys_authority_menus` VALUES ('8881', 2);
 INSERT INTO `sys_authority_menus` VALUES ('8881', 18);
@@ -517,7 +553,7 @@ CREATE TABLE `sys_base_menus`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_base_menus_deleted_at`(`deleted_at`) USING BTREE,
   INDEX `idx_sys_base_menus_deleted_at`(`deleted_at`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_base_menus
@@ -545,6 +581,7 @@ INSERT INTO `sys_base_menus` VALUES (42, '2020-04-02 14:19:36', '2020-05-09 17:4
 INSERT INTO `sys_base_menus` VALUES (45, '2020-04-29 17:19:34', '2020-05-24 16:38:32', NULL, 0, 0, 'iconList', 'iconList', 1, 'view/iconList/index.vue', '图标集合', 'star-on', NULL, 2, 0, 0);
 INSERT INTO `sys_base_menus` VALUES (47, '2020-05-24 16:34:55', '2020-05-24 16:36:07', NULL, 0, 0, 'stock', 'stock', 0, 'view/stock/index.vue', '股票', 's-marketing', NULL, 5, 0, 0);
 INSERT INTO `sys_base_menus` VALUES (48, '2020-05-24 16:37:34', '2020-05-24 16:39:28', NULL, 0, 47, 'top', 'top', 0, 'view/stock/top/top.vue', 'Top列表', 'data-line', NULL, 1, 0, 0);
+INSERT INTO `sys_base_menus` VALUES (49, '2020-05-26 10:45:09', '2020-05-26 13:22:28', NULL, 0, 47, 'monitor', 'monitor', 0, 'view/stock/monitor/monitor.vue', '监控列表', 's-custom', NULL, 2, 0, 0);
 
 -- ----------------------------
 -- Table structure for sys_data_authority_id

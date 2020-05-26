@@ -22,13 +22,13 @@ func (dao *stockMonitorModel) Save(stock model.StockMonitor) (err error) {
 	return
 }
 
-func (dao *stockMonitorModel) DelBySymbol(symbol string, userId uint) (err error) {
-	err = dao.Db.Exec("update stock_monitor set del_status = ? where symbol = ? and user_id = ?", time.Now().Unix(), symbol, userId).Error
+func (dao *stockMonitorModel) DelById(id int64, userId uint) (err error) {
+	err = dao.Db.Exec("update stock_monitor set del_status = ? where id = ? and user_id = ?", time.Now().Unix(), id, userId).Error
 	return
 }
 
 func (dao *stockMonitorModel) UpdateByMonitorNum(monitorHigh, monitorLow float64, id int64, uid uint) (err error) {
-	err = dao.Db.Exec("update stock_monitor set monitor_high = ?,set monitor_low = ? where id = ? and user_id = ? ", monitorHigh, monitorLow, id, uid).Error
+	err = dao.Db.Exec("update stock_monitor set monitor_high = ?, monitor_low = ? where id = ? and user_id = ? ", monitorHigh, monitorLow, id, uid).Error
 	return
 }
 
@@ -37,8 +37,9 @@ func (dao *stockMonitorModel) ListByUser(userId uint) (stockMonitorList []*model
 	return
 }
 
-func (dao *stockMonitorModel) FindByUserAndSymbol(userId uint, symbol string) (stockMonitor *model.StockMonitor, err error) {
-	err = dao.Db.Where("user_id = ? and symbol = ? AND del_status = ? ", userId, symbol, DEL_STATUS).Order("create_time desc").First(&stockMonitor).Error
+func (dao *stockMonitorModel) FindByUserAndId(userId uint, id int64) (stockMonitor *model.StockMonitor, err error) {
+	stockMonitor = &model.StockMonitor{}
+	err = dao.Db.Where("user_id = ? and id = ? AND del_status = ? ", userId, id, DEL_STATUS).Order("create_time desc").First(stockMonitor).Error
 	return
 }
 

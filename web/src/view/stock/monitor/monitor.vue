@@ -54,53 +54,43 @@
           <el-button @click="onSubmit" type="primary">查询</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button @click="openDialog('addStockMonitor')" type="primary">新增api</el-button>
+          <el-button @click="openDialog('add')" type="primary">新增监控</el-button>
         </el-form-item>
       </el-form>
     </div>
     <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
       <el-table-column label="名称" min-width="150" prop="symbol"></el-table-column>
       <el-table-column label="市值" min-width="130" prop="market_capital" sortable ></el-table-column>
+      <el-table-column label="当前价" min-width="80" prop="current" sortable ></el-table-column>
 
       <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
       <el-table-column label="量比" min-width="80" prop="volume_ratio" sortable></el-table-column>
 
-      <!--      <el-table-column label="涨停" min-width="80" prop="high" sortable></el-table-column>
-            <el-table-column label="跌停" min-width="80" prop="limit_down" sortable></el-table-column>-->
-
-      <!--      <el-table-column label="最高" min-width="80" prop="chg" sortable></el-table-column>
-            <el-table-column label="最低" min-width="80" prop="low" sortable></el-table-column>-->
-
       <el-table-column label="成交量" min-width="120" prop="volume" sortable></el-table-column>
       <el-table-column label="成交额" min-width="120" prop="amount" sortable></el-table-column>
-
-      <!--      <el-table-column label="今开" min-width="80" prop="open" sortable></el-table-column>
-            <el-table-column label="昨收" min-width="80" prop="last_close" sortable></el-table-column>-->
+      <el-table-column label="高位预警" min-width="120" prop="monitor_high" sortable></el-table-column>
+      <el-table-column label="低位预警" min-width="120" prop="monitor_low" sortable></el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button @click="editStockMonitor(scope.row)" size="small" type="text">编辑</el-button>
+          <el-button @click="deleteStockMonitor(scope.row)" size="small" type="text">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <el-dialog :before-close="closeDialog" :title="dialogTitle" :visible.sync="dialogFormVisible">
-      <el-form :inline="true" :model="form" :rules="rules" label-width="80px" ref="apiForm">
-        <el-form-item label="路径" prop="path">
-          <el-input autocomplete="off" v-model="form.path"></el-input>
+      <el-form :inline="true" :model="form" :rules="rules" label-width="80px" ref="stockMonitorForm">
+        <el-form-item label="编码" prop="symbol">
+          <el-input autocomplete="off" v-model="form.symbol"></el-input>
         </el-form-item>
-        <el-form-item label="请求" prop="method">
-          <el-select placeholder="请选择" v-model="form.method">
-            <el-option
-                    :key="item.value"
-                    :label="`${item.label}(${item.value})`"
-                    :value="item.value"
-                    v-for="item in methodOptions"
-            ></el-option>
-          </el-select>
+        <el-form-item label="高位预警" prop="monitor_high">
+          <el-input-number placeholder="1.2" v-model="form.monitor_high" :controls="false"></el-input-number>
         </el-form-item>
-        <el-form-item label="api分组" prop="apiGroup">
-          <el-input autocomplete="off" v-model="form.apiGroup"></el-input>
-        </el-form-item>
-        <el-form-item label="api简介" prop="description">
-          <el-input autocomplete="off" v-model="form.description"></el-input>
+        <el-form-item label="低位预警" prop="monitor_low">
+          <el-input-number placeholder="1.2" v-model="form.monitor_low" :controls="false"></el-input-number>
         </el-form-item>
       </el-form>
-      <div class="warning">新增监控需要在角色管理内配置权限才可使用</div>
+<!--      <div class="warning">新增监控需要在角色管理内配置权限才可使用</div>-->
       <div class="dialog-footer" slot="footer">
         <el-button @click="closeDialog">取 消</el-button>
         <el-button @click="enterDialog" type="primary">确 定</el-button>
@@ -148,6 +138,11 @@
     data() {
       return {
         dialogTitle: '新增监控',
+        form: {
+          symbol: '',
+          monitor_high: 0,
+          monitor_low: 0
+        },
         dialogFormVisible: false,
         listApi: getMonitorList,
         searchInfo: {
@@ -168,9 +163,6 @@
       //搜索
       onSubmit() {
         this.getTableData()
-        setInterval(()=>{
-          this.getTableData()
-        },10000)
       },
       openDialog(type) {
         switch (type) {
@@ -187,10 +179,18 @@
         this.dialogFormVisible = true
       },
       async enterDialog() {
-        this.$refs.apiForm.validate(async valid => {
+        this.$refs.stockMonitorForm.validate(async valid => {
           if (valid) {
+            if (this.form.monitor_high <= this.form.monitor_low){
+              this.$message({
+                type: 'error',
+                message: '参数错误',
+                showClose: true
+              })
+              return
+            }
             switch (this.type) {
-              case 'addApi':
+              case 'add':
               {
                 const res = await addMonitor(this.form)
                 if (res.code == 0) {
@@ -236,13 +236,21 @@
         this.initForm()
         this.dialogFormVisible = false
       },
-      async editApi(row) {
-        const res = await getMonitorOne({ id: row.ID })
-        this.form = res.data.api
+      async editStockMonitor(row) {
+        const res = await getMonitorOne({ id: row.id })
+        this.form = res.data
         this.openDialog('edit')
       },
-      async deleteApi(row) {
-        this.$confirm('此操作将永久删除所有角色下该菜单, 是否继续?', '提示', {
+      initForm() {
+        this.$refs.stockMonitorForm.resetFields()
+        this.form= {
+          symbol: '',
+          monitor_high: undefined,
+          monitor_low: undefined
+        }
+      },
+      async deleteStockMonitor(row) {
+        this.$confirm('此操作将永久删除当前监控股票, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -266,6 +274,9 @@
     },
     created(){
       this.getTableData()
+      setInterval(()=>{
+        this.getTableData()
+      },20000)
     }
   }
 </script>

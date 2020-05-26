@@ -4,6 +4,7 @@ import (
 	"taylors/dao"
 	"taylors/global"
 	"taylors/model"
+	"taylors/service"
 )
 
 //注册数据库表专用
@@ -24,5 +25,6 @@ func DBTables() {
 		model.StockMonitor{},
 	)
 	dao.Init()
+	service.Init()
 	global.GVA_LOG.Debug("register table success")
 }

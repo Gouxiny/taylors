@@ -1,6 +1,7 @@
 package service
 
 import (
+	"taylors/global"
 	"taylors/model"
 	"taylors_proto/taylors_stock"
 	"time"
@@ -13,6 +14,13 @@ var StockCommonService = new(stockCommonService)
 
 var _OverTime = time.Second * 10
 
+func Init() {
+	err := StockMonitorService.SyncMonitor()
+	if err != nil {
+		global.GVA_LOG.Error("初始化监控失败", err)
+	}
+}
+
 func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 	for _, top := range gstocks {
 		stockList = append(stockList, model.Stock{
@@ -22,6 +30,7 @@ func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 			Code:               top.Code,
 			TotalShares:        top.TotalShares,
 			MarketCapital:      top.MarketCapital,
+			Current:            top.Current,
 			Pb:                 top.Pb,
 			PeTtm:              top.PeTtm,
 			CurrentYearPercent: top.CurrentYearPercent,
@@ -39,6 +48,36 @@ func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 			VolumeRatio:        top.VolumeRatio,
 			Time:               top.Time,
 		})
+	}
+	return
+}
+
+func ConvStockMonitorModel(stock model.Stock) (stockModel model.StockMonitorModel) {
+	stockModel = model.StockMonitorModel{
+		Id:                 stock.Id,
+		Symbol:             stock.Symbol,
+		Name:               stock.Name,
+		Exchange:           stock.Exchange,
+		Code:               stock.Code,
+		TotalShares:        stock.TotalShares,
+		MarketCapital:      stock.MarketCapital,
+		Current:            stock.Current,
+		Pb:                 stock.Pb,
+		PeTtm:              stock.PeTtm,
+		CurrentYearPercent: stock.CurrentYearPercent,
+		High52w:            stock.High52w,
+		Low52w:             stock.Low52w,
+		LimitDown:          stock.LimitDown,
+		High:               stock.High,
+		Chg:                stock.Chg,
+		Low:                stock.Low,
+		Open:               stock.Open,
+		LastClose:          stock.LastClose,
+		Volume:             stock.Volume,
+		Amount:             stock.Amount,
+		Percent:            stock.Percent,
+		VolumeRatio:        stock.VolumeRatio,
+		Time:               stock.Time,
 	}
 	return
 }

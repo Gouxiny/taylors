@@ -26,7 +26,7 @@ func (*stockAll) StockAllDetailList(c *gin.Context) {
 		return
 	}
 
-	stockList, err := service.StockAllService.AllDetailList(req.PageNum, req.PageSize)
+	stockList, err := service.StockAllService.AllDetailList()
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取失败，%v", err), c)
 	} else {

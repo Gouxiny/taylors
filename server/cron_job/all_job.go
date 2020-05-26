@@ -26,7 +26,7 @@ func (job *allJob) Run() {
 		return
 	}
 
-	stockList, err := service.StockAllService.AllDetailList(1, 100000)
+	stockList, err := service.StockAllService.AllDetailList()
 	if err != nil {
 		return
 	}

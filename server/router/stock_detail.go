@@ -17,6 +17,7 @@ func InitStockRouter(Router *gin.RouterGroup) {
 	}
 
 	{
+		StockRouter.POST("monitor/one", v1.StockMonitorCon.StockMonitorOne)
 		StockRouter.POST("monitor/list", v1.StockMonitorCon.StockMonitorList)
 		StockRouter.POST("monitor/add", v1.StockMonitorCon.AddMonitor)
 		StockRouter.POST("monitor/del", v1.StockMonitorCon.DelMonitor)

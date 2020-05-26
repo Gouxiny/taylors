@@ -27,7 +27,7 @@ func (*stockMonitor) StockMonitorOne(c *gin.Context) {
 	}
 	claims, _ := c.Get("claims")
 	waitUse := claims.(*request.CustomClaims)
-	stockMonitor, err := service.StockMonitorService.MonitorOne(req.Symbol, waitUse.ID)
+	stockMonitor, err := service.StockMonitorService.MonitorOne(req.Id, waitUse.ID)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取失败，%v", err), c)
 	} else {
@@ -43,7 +43,14 @@ func (*stockMonitor) StockMonitorOne(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /stock/monitor/list [post]
 func (*stockMonitor) StockMonitorList(c *gin.Context) {
-	stockList, err := service.StockMonitorService.MonitorList()
+	var req request.MonitorListReq
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.FailWithMessage(fmt.Sprintf("参数错误，%v", err), c)
+		return
+	}
+	claims, _ := c.Get("claims")
+	waitUse := claims.(*request.CustomClaims)
+	stockList, err := service.StockMonitorService.MonitorList(waitUse.ID, req)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取失败，%v", err), c)
 	} else {
@@ -96,7 +103,7 @@ func (*stockMonitor) DelMonitor(c *gin.Context) {
 	}
 	claims, _ := c.Get("claims")
 	waitUse := claims.(*request.CustomClaims)
-	err := service.StockMonitorService.DelMonitor(req.Symbol, waitUse.ID)
+	err := service.StockMonitorService.DelMonitor(req.Id, waitUse.ID)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("删除失败，%v", err), c)
 	} else {

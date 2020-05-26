@@ -43,9 +43,10 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
+    <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','current','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
       <el-table-column label="名称" min-width="150" prop="symbol"></el-table-column>
       <el-table-column label="市值" min-width="130" prop="market_capital" sortable ></el-table-column>
+      <el-table-column label="当前价" min-width="80" prop="current" sortable></el-table-column>
 
       <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
       <el-table-column label="量比" min-width="80" prop="volume_ratio" sortable></el-table-column>
@@ -91,13 +92,13 @@
       //搜索
       onSubmit() {
         this.getTableData()
-        setInterval(()=>{
-          this.getTableData()
-        },10000)
       }
     },
     created(){
       this.getTableData()
+      setInterval(()=>{
+        this.getTableData()
+      },10000)
     }
   }
 </script>

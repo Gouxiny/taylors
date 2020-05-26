@@ -10,7 +10,7 @@ import (
 type stockAllService struct {
 }
 
-func (*stockAllService) AllDetailList(pageNum, pageSize int) (stockList []model.Stock, err error) {
+func (*stockAllService) AllDetailList() (stockList []model.Stock, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), _OverTime)
 	defer cancel()
 	req := &taylors_stock.AllDetailReq{}

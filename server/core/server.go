@@ -10,7 +10,6 @@ import (
 )
 
 func RunWindowsServer() {
-	initialize.InitModule()
 	if global.GVA_CONFIG.System.UseMultipoint {
 		// 初始化redis服务
 		initialize.Redis()

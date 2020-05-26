@@ -15,7 +15,18 @@ type AllDetailListReq struct {
 }
 
 type MonitorOneReq struct {
-	Symbol string `json:"symbol" desc:"编码" `
+	Id int64 `json:"id" desc:"key" `
+}
+
+type MonitorListReq struct {
+	Name             string  `json:"name" desc:"名称" `
+	Symbol           string  `json:"symbol" desc:"编码" `
+	MarketCapitalMax float64 `json:"marketCapitalMax" desc:"市值范围最大" `
+	MarketCapitalMin float64 `json:"marketCapitalMin" desc:"市值范围最小" `
+	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `
+	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
+	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
+	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
 }
 
 type AddMonitorReq struct {
@@ -25,7 +36,7 @@ type AddMonitorReq struct {
 }
 
 type DelMonitorReq struct {
-	Symbol string `json:"symbol" desc:"编码" `
+	Id int64 `json:"id" desc:"key" `
 }
 
 type UpdateMonitorReq struct {
