@@ -5,7 +5,7 @@ captcha:
 casbin:
   model-path: ./resource/rbac_model.conf
 cron:
-  spec_all: 31 23 * * ?
+  spec_all: 38 22 * * ?
 jwt:
   signing-key: qmPlus
 log:

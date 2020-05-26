@@ -31,7 +31,7 @@ func (dao *stockModel) Max() (maxId int64, err error) {
 		MaxId int64 `gorm:"column:max_id"`
 	}
 	count := &C{}
-	err = dao.Db.Raw("SELECT max(id) AS max_id from stock").Scan(count).Error
+	err = dao.Db.Raw("SELECT max(id) AS max_id from stocks").Scan(count).Error
 	if err != nil {
 		return
 	}
