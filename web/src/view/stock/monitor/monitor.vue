@@ -167,10 +167,10 @@
       openDialog(type) {
         switch (type) {
           case 'add':
-            this.dialogTitlethis = '新增监控'
+            this.dialogTitle = '新增监控'
             break
           case 'edit':
-            this.dialogTitlethis = '编辑监控'
+            this.dialogTitle = '编辑监控'
             break
           default:
             break
