@@ -72,12 +72,20 @@
 
 <!--      <el-table-column label="今开" min-width="80" prop="open" sortable></el-table-column>
       <el-table-column label="昨收" min-width="80" prop="last_close" sortable></el-table-column>-->
+      <el-table-column fixed="right" label="操作" width="100">
+        <template slot-scope="scope">
+          <el-button @click="addStockMonitorDay(scope.row)" size="small" type="primary">监控</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 
 
 <script>
+  import {
+    addMonitor
+  } from '@/api/stockMonitor'
   import {
     getTopList
   } from '@/api/stockTop'
@@ -102,7 +110,21 @@
       //搜索
       onSubmit() {
         this.getTableData()
-      }
+      },
+      async addStockMonitorDay(row) {
+        const res = await addMonitor({isDay:true,symbol: row.symbol})
+        if (res.code === 0) {
+          this.$message({
+            type: 'success',
+            message: '监控成功!'
+          })
+        }else{
+          this.$message({
+            type: 'error',
+            message: '监控失败!'
+          })
+        }
+     }
     },
     created(){
       this.getTableData()

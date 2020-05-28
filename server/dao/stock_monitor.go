@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"taylors/global"
 	"taylors/model"
+	"taylors/utils"
 	"time"
 )
 
@@ -32,8 +33,13 @@ func (dao *stockMonitorModel) UpdateByMonitorNum(monitorHigh, monitorLow float64
 	return
 }
 
-func (dao *stockMonitorModel) ListByUser(userId uint) (stockMonitorList []*model.StockMonitor, err error) {
-	err = dao.Db.Where("user_id = ? AND del_status = ? ", userId, DEL_STATUS).Order("create_time desc").Find(&stockMonitorList).Error
+func (dao *stockMonitorModel) ListByUserNotDay(userId uint) (stockMonitorList []*model.StockMonitor, err error) {
+	err = dao.Db.Where("user_id = ? AND del_status = ? and is_day = ? ", userId, DEL_STATUS, false).Order("create_time desc").Find(&stockMonitorList).Error
+	return
+}
+
+func (dao *stockMonitorModel) ListByUserAndDay(userId uint, day int64) (stockMonitorList []*model.StockMonitor, err error) {
+	err = dao.Db.Where("user_id = ? AND del_status = ? and day = ? ", userId, DEL_STATUS, day).Order("create_time desc").Find(&stockMonitorList).Error
 	return
 }
 
@@ -44,6 +50,6 @@ func (dao *stockMonitorModel) FindByUserAndId(userId uint, id int64) (stockMonit
 }
 
 func (dao *stockMonitorModel) ListNotDel() (stockMonitorList []*model.StockMonitor, err error) {
-	err = dao.Db.Where("del_status = ? ", DEL_STATUS).Order("create_time desc").Find(&stockMonitorList).Error
+	err = dao.Db.Where("del_status = ? and (is_day = ? or (is_day = ? and day = ? ))", DEL_STATUS, false, true, utils.NowUnix()).Order("create_time desc").Find(&stockMonitorList).Error
 	return
 }

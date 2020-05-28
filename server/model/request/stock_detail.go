@@ -21,6 +21,7 @@ type MonitorOneReq struct {
 }
 
 type MonitorListReq struct {
+	IsDay            bool    `json:"isDay" desc:"是否日监控" `
 	Name             string  `json:"name" desc:"名称" `
 	Symbol           string  `json:"symbol" desc:"编码" `
 	MarketCapitalMax float64 `json:"marketCapitalMax" desc:"市值范围最大" `
@@ -34,6 +35,7 @@ type MonitorListReq struct {
 }
 
 type AddMonitorReq struct {
+	IsDay       bool    `json:"isDay" desc:"是否日监控" `
 	Symbol      string  `json:"symbol" desc:"编码" `
 	MonitorHigh float64 `json:"monitor_high" desc:"高位预警" `
 	MonitorLow  float64 `json:"monitor_low" desc:"低位预警" `

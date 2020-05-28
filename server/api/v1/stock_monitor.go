@@ -79,7 +79,7 @@ func (*stockMonitor) AddMonitor(c *gin.Context) {
 	}
 	claims, _ := c.Get("claims")
 	waitUse := claims.(*request.CustomClaims)
-	err := service.StockMonitorService.AddMonitor(req.Symbol, req.MonitorHigh, req.MonitorLow, waitUse.ID)
+	err := service.StockMonitorService.AddMonitor(req.IsDay, req.Symbol, req.MonitorHigh, req.MonitorLow, waitUse.ID)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("创建失败，%v", err), c)
 	} else {

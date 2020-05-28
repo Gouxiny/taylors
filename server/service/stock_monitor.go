@@ -28,9 +28,17 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 	ctx, cancel := context.WithTimeout(context.Background(), _OverTime)
 	defer cancel()
 
-	monitorList, err := dao.StockMonitorDao.ListByUser(uid)
-	if err != nil {
-		return
+	monitorList := []*model.StockMonitor{}
+	if !filter.IsDay {
+		monitorList, err = dao.StockMonitorDao.ListByUserNotDay(uid)
+		if err != nil {
+			return
+		}
+	} else {
+		monitorList, err = dao.StockMonitorDao.ListByUserAndDay(uid, utils.NowUnix())
+		if err != nil {
+			return
+		}
 	}
 
 	monitorMap := make(map[string]*model.StockMonitor, 0)
@@ -119,14 +127,19 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 	return
 }
 
-func (srv *stockMonitorService) AddMonitor(symbol string, monitorHigh, monitorLow float64, userId uint) (err error) {
+func (srv *stockMonitorService) AddMonitor(isDay bool, symbol string, monitorHigh, monitorLow float64, userId uint) (err error) {
 	monitor := model.StockMonitor{
 		Symbol:      symbol,
 		MonitorHigh: monitorHigh,
 		MonitorLow:  monitorLow,
 		UserId:      userId,
+		IsDay:       isDay,
 		CreateTime:  time.Now().Unix(),
 	}
+	if isDay {
+		monitor.Day = utils.NowUnix()
+	}
+
 	err = dao.StockMonitorDao.Save(monitor)
 	go srv.SyncMonitor()
 

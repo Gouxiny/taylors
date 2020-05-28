@@ -61,9 +61,9 @@
         <el-form-item>
           <el-button @click="onSubmit" type="primary">查询</el-button>
         </el-form-item>
-        <el-form-item>
-          <el-button @click="openDialog('add')" type="primary">新增监控</el-button>
-        </el-form-item>
+<!--        <el-form-item>-->
+<!--          <el-button @click="openDialog('add')" type="primary">新增监控</el-button>-->
+<!--        </el-form-item>-->
       </el-form>
     </div>
     <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
@@ -148,6 +148,7 @@
       return {
         dialogTitle: '新增监控',
         form: {
+          isDay:true,
           symbol: '',
           monitor_high: 0,
           monitor_low: 0
@@ -155,6 +156,7 @@
         dialogFormVisible: false,
         listApi: getMonitorList,
         searchInfo: {
+          isDay:true,
           name:undefined,
           symbol:undefined,
           currentMax:undefined,
@@ -204,7 +206,7 @@
               case 'add':
               {
                 const res = await addMonitor(this.form)
-                if (res.code == 0) {
+                if (res.code === 0) {
                   this.$message({
                     type: 'success',
                     message: '添加成功',
@@ -219,7 +221,7 @@
               case 'edit':
               {
                 const res = await updateMonitor(this.form)
-                if (res.code == 0) {
+                if (res.code === 0) {
                   this.$message({
                     type: 'success',
                     message: '编辑成功',
@@ -267,7 +269,7 @@
           type: 'warning'
         }).then(async () => {
             const res = await delMonitor(row)
-            if (res.code == 0) {
+            if (res.code === 0) {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
