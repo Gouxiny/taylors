@@ -1,7 +1,6 @@
-// 自动生成模板Stock
-package model
+package response
 
-type Stock struct {
+type StockMonitorModel struct {
 	Id                 int64   `gorm:"column:id;primary_key;AUTO_INCREMENT" json:"id"`
 	Symbol             string  `gorm:"column:symbol" json:"symbol"`                             //编码
 	Name               string  `gorm:"column:name" json:"name"`                                 //名称
@@ -27,4 +26,6 @@ type Stock struct {
 	VolumeRatio        float64 `gorm:"volume_ratio" json:"volume_ratio"`                        //量比
 	Time               int64   `gorm:"column:time" json:"time"`                                 //时间
 	CreateTime         int64   `gorm:"column:create_time" json:"create_time"`                   //数据创建时间
+	MonitorHigh        float64 `gorm:"column:monitor_high" json:"monitor_high"`                 //高位预警
+	MonitorLow         float64 `gorm:"column:monitor_low" json:"monitor_low"`                   //低位预警
 }

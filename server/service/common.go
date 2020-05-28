@@ -3,6 +3,7 @@ package service
 import (
 	"taylors/global"
 	"taylors/model"
+	"taylors/model/response"
 	"taylors_proto/taylors_stock"
 	"time"
 )
@@ -52,8 +53,8 @@ func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 	return
 }
 
-func ConvStockMonitorModel(stock model.Stock) (stockModel model.StockMonitorModel) {
-	stockModel = model.StockMonitorModel{
+func ConvStockMonitorModel(stock model.Stock) (stockModel response.StockMonitorModel) {
+	stockModel = response.StockMonitorModel{
 		Id:                 stock.Id,
 		Symbol:             stock.Symbol,
 		Name:               stock.Name,

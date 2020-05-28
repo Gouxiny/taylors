@@ -6,6 +6,7 @@ import (
 	"taylors/dao"
 	"taylors/model"
 	"taylors/model/request"
+	"taylors/model/response"
 	"taylors/module/crawler"
 	"taylors/utils"
 	"taylors_proto/taylors_stock"
@@ -23,7 +24,7 @@ func (*stockMonitorService) MonitorOne(id int64, userId uint) (stockMonitor *mod
 	return
 }
 
-func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorListReq) (stockList []model.StockMonitorModel, err error) {
+func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorListReq) (stockList []response.StockMonitorModel, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), _OverTime)
 	defer cancel()
 
@@ -42,7 +43,7 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 	if err != nil {
 		return
 	}
-	stocks := make([]model.StockMonitorModel, 0)
+	stocks := make([]response.StockMonitorModel, 0)
 	stockConvList := Conv(monitorRsp.StockList)
 	for _, stock := range stockConvList {
 		symbolAndName := strings.Split(stock.Symbol, "-")
