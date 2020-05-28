@@ -52,6 +52,16 @@ func (*stockTopService) TopList(filter request.StockTopListReq) (stockList []mod
 				continue
 			}
 		}
+		if filter.CurrentMax > 0 {
+			if stock.Current > filter.CurrentMax {
+				continue
+			}
+		}
+		if filter.CurrentMin > 0 {
+			if stock.Current < filter.CurrentMin {
+				continue
+			}
+		}
 		stockList = append(stockList, stock)
 	}
 

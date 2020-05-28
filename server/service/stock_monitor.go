@@ -102,6 +102,16 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 				continue
 			}
 		}
+		if filter.CurrentMax > 0 {
+			if stock.Current > filter.CurrentMax {
+				continue
+			}
+		}
+		if filter.CurrentMin > 0 {
+			if stock.Current < filter.CurrentMin {
+				continue
+			}
+		}
 		stockList = append(stockList, stock)
 	}
 

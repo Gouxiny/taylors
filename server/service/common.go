@@ -24,7 +24,7 @@ func Init() {
 func Conv(gstocks []*taylors_stock.Stock) (stockList []model.Stock) {
 	for _, top := range gstocks {
 		stockList = append(stockList, model.Stock{
-			Symbol:             top.Symbol + "-" + top.Name,
+			Symbol:             top.Symbol,
 			Name:               top.Name,
 			Exchange:           top.Exchange,
 			Code:               top.Code,

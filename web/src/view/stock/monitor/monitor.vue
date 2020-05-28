@@ -9,7 +9,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item label="编号">
+            <el-form-item label="编码">
               <el-input placeholder="SZ0000001"  v-model="searchInfo.symbol"></el-input>
             </el-form-item>
           </el-col>
@@ -25,6 +25,16 @@
               <el-input-number placeholder="最大"  v-model="searchInfo.marketCapitalMax" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
+          <el-col :span="5">
+            <el-form-item label="股价">
+              <el-input-number placeholder="最小" v-model="searchInfo.currentMin" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input-number placeholder="最大"  v-model="searchInfo.currentMax" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-row>
           <el-col :span="5">
@@ -37,8 +47,6 @@
               <el-input-number placeholder="最大"  v-model="searchInfo.percentMax" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="5">
             <el-form-item label="量比">
               <el-input-number placeholder="最小"  v-model="searchInfo.volume_ratio_min" :controls="false"></el-input-number>
@@ -59,8 +67,9 @@
       </el-form>
     </div>
     <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
-      <el-table-column label="名称" min-width="150" prop="symbol"></el-table-column>
-      <el-table-column label="市值" min-width="130" prop="market_capital" sortable ></el-table-column>
+      <el-table-column label="名称" min-width="70" prop="name"></el-table-column>
+      <el-table-column label="编码" min-width="70" prop="symbol"></el-table-column>
+      <el-table-column label="市值" min-width="80" prop="market_capital" sortable ></el-table-column>
       <el-table-column label="当前价" min-width="80" prop="current" sortable ></el-table-column>
 
       <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
@@ -148,6 +157,8 @@
         searchInfo: {
           name:undefined,
           symbol:undefined,
+          currentMax:undefined,
+          currentMin:undefined,
           marketCapitalMin: undefined,
           marketCapitalMax: undefined,
           percentMin: undefined,

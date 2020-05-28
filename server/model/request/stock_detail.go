@@ -7,6 +7,8 @@ type StockTopListReq struct {
 	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
 	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
 	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
+	CurrentMax       float64 `json:"currentMax" desc:"股价范围最大" `
+	CurrentMin       float64 `json:"currentMin" desc:"股价范围最小" `
 }
 
 type AllDetailListReq struct {
@@ -27,6 +29,8 @@ type MonitorListReq struct {
 	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
 	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
 	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
+	CurrentMax       float64 `json:"currentMax" desc:"股价范围最大" `
+	CurrentMin       float64 `json:"currentMin" desc:"股价范围最小" `
 }
 
 type AddMonitorReq struct {
