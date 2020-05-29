@@ -332,6 +332,8 @@ definitions:
     type: object
   request.AddMonitorReq:
     properties:
+      isDay:
+        type: boolean
       monitor_high:
         type: number
       monitor_low:
@@ -378,8 +380,8 @@ definitions:
     type: object
   request.DelMonitorReq:
     properties:
-      symbol:
-        type: string
+      id:
+        type: integer
     type: object
   request.GetById:
     properties:
@@ -388,8 +390,8 @@ definitions:
     type: object
   request.MonitorOneReq:
     properties:
-      symbol:
-        type: string
+      id:
+        type: integer
     type: object
   request.PageInfo:
     properties:
@@ -450,6 +452,10 @@ definitions:
     type: object
   request.StockTopListReq:
     properties:
+      currentMax:
+        type: number
+      currentMin:
+        type: number
       marketCapitalMax:
         type: number
       marketCapitalMin:

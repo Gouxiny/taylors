@@ -2571,6 +2571,9 @@ var doc = `{
         "request.AddMonitorReq": {
             "type": "object",
             "properties": {
+                "isDay": {
+                    "type": "boolean"
+                },
                 "monitor_high": {
                     "type": "number"
                 },
@@ -2643,8 +2646,8 @@ var doc = `{
         "request.DelMonitorReq": {
             "type": "object",
             "properties": {
-                "symbol": {
-                    "type": "string"
+                "id": {
+                    "type": "integer"
                 }
             }
         },
@@ -2659,8 +2662,8 @@ var doc = `{
         "request.MonitorOneReq": {
             "type": "object",
             "properties": {
-                "symbol": {
-                    "type": "string"
+                "id": {
+                    "type": "integer"
                 }
             }
         },
@@ -2755,6 +2758,12 @@ var doc = `{
         "request.StockTopListReq": {
             "type": "object",
             "properties": {
+                "currentMax": {
+                    "type": "number"
+                },
+                "currentMin": {
+                    "type": "number"
+                },
                 "marketCapitalMax": {
                     "type": "number"
                 },

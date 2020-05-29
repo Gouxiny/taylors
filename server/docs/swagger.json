@@ -2555,6 +2555,9 @@
         "request.AddMonitorReq": {
             "type": "object",
             "properties": {
+                "isDay": {
+                    "type": "boolean"
+                },
                 "monitor_high": {
                     "type": "number"
                 },
@@ -2627,8 +2630,8 @@
         "request.DelMonitorReq": {
             "type": "object",
             "properties": {
-                "symbol": {
-                    "type": "string"
+                "id": {
+                    "type": "integer"
                 }
             }
         },
@@ -2643,8 +2646,8 @@
         "request.MonitorOneReq": {
             "type": "object",
             "properties": {
-                "symbol": {
-                    "type": "string"
+                "id": {
+                    "type": "integer"
                 }
             }
         },
@@ -2739,6 +2742,12 @@
         "request.StockTopListReq": {
             "type": "object",
             "properties": {
+                "currentMax": {
+                    "type": "number"
+                },
+                "currentMin": {
+                    "type": "number"
+                },
                 "marketCapitalMax": {
                     "type": "number"
                 },
