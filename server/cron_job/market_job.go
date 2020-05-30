@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-var AllJob *allJob
+var MarketJob *marketJob
 
-type allJob struct {
+type marketJob struct {
 	List []model.Stock
 }
 
 func init() {
-	AllJob = new(allJob)
+	MarketJob = new(marketJob)
 }
 
-func (job *allJob) Run() {
+func (job *marketJob) Run() {
 	defer func() {
 		recover()
 	}()
@@ -26,7 +26,7 @@ func (job *allJob) Run() {
 		return
 	}
 
-	stockList, err := service.StockAllService.AllDetailList()
+	stockList, err := service.StockAllService.AllList()
 	if err != nil {
 		return
 	}

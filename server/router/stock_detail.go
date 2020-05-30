@@ -13,7 +13,7 @@ func InitStockRouter(Router *gin.RouterGroup) {
 	}
 
 	{
-		StockRouter.POST("all/list", v1.StockAllCon.StockAllDetailList)
+		StockRouter.POST("all/list", v1.StockAllCon.StockAllList)
 	}
 
 	{

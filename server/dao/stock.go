@@ -12,7 +12,7 @@ type stockModel struct {
 
 func newStockDao() *stockModel {
 	stock := &model.Stock{}
-	global.GVA_DB.Model(&model.Stock{}).AddIndex("base_index", "symbol", "name", "exchange", "code")
+	global.GVA_DB.Model(&model.Stock{}).AddIndex("base_index", "code", "name", "percent", "szh", "current")
 	return &stockModel{Db: global.GVA_DB.Model(stock)}
 }
 
@@ -21,8 +21,8 @@ func (dao *stockModel) Save(stock model.Stock) (err error) {
 	return
 }
 
-func (dao *stockModel) FindBySymbol(symbol string) (stockList []*model.Stock, err error) {
-	err = dao.Db.Where("symbol = ? ", symbol).Order("create_time desc").Find(&stockList).Error
+func (dao *stockModel) FindByCode(code string) (stockList []*model.Stock, err error) {
+	err = dao.Db.Where("code = ? ", code).Order("create_time desc").Find(&stockList).Error
 	return
 }
 
@@ -31,7 +31,7 @@ func (dao *stockModel) Max() (maxId int64, err error) {
 		MaxId int64 `gorm:"column:max_id"`
 	}
 	count := &C{}
-	err = dao.Db.Raw("SELECT max(id) AS max_id from stocks").Scan(count).Error
+	err = dao.Db.Raw("SELECT max(id) AS max_id from stock").Scan(count).Error
 	if err != nil {
 		return
 	}

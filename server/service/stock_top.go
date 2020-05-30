@@ -1,27 +1,18 @@
 package service
 
 import (
-	"context"
+	"taylors/crawler"
 	"taylors/model"
 	"taylors/model/request"
-	"taylors/module/crawler"
-	"taylors_proto/taylors_stock"
 )
 
 type stockTopService struct {
 }
 
 func (*stockTopService) TopList(filter request.StockTopListReq) (stockList []model.Stock, err error) {
-	ctx, cancel := context.WithTimeout(context.Background(), _OverTime)
-	defer cancel()
-	req := &taylors_stock.TopReq{}
-	topRsp, err := crawler.Grpc_cli.ListTop(ctx, req)
-	if err != nil {
-		return
-	}
-	stocks := Conv(topRsp.StockList)
+	stockListCrawler := crawler.NewDongFangCrawler().Top()
 
-	for _, stock := range stocks {
+	for _, stock := range stockListCrawler {
 		if filter.MarketCapitalMax > 0 {
 			if stock.MarketCapital > filter.MarketCapitalMax {
 				continue
@@ -62,6 +53,7 @@ func (*stockTopService) TopList(filter request.StockTopListReq) (stockList []mod
 				continue
 			}
 		}
+		stock.MarketCapital = stock.MarketCapital / 100000000
 		stockList = append(stockList, stock)
 	}
 

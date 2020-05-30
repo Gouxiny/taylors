@@ -51,27 +51,19 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','current','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
-      <el-table-column label="名称" min-width="50" prop="name"></el-table-column>
-      <el-table-column label="编码" min-width="50" prop="symbol"></el-table-column>
+    <el-table :data="tableData" border stripe :default-sort = "{prop: ['f14','f12','f20','f2','f3','f10','f5','f6'], order: 'descending'}">
+      <el-table-column label="名称" min-width="50" prop="f14"></el-table-column>
+      <el-table-column label="编码" min-width="50" prop="f12"></el-table-column>
 
-      <el-table-column label="市值" min-width="70" prop="market_capital" sortable ></el-table-column>
-      <el-table-column label="当前价" min-width="70" prop="current" sortable></el-table-column>
+      <el-table-column label="市值" min-width="70" prop="f20" sortable ></el-table-column>
+      <el-table-column label="当前价" min-width="70" prop="f2" sortable></el-table-column>
 
-      <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
-      <el-table-column label="量比" min-width="80" prop="volume_ratio" sortable></el-table-column>
+      <el-table-column label="涨幅" min-width="80" prop="f3" sortable></el-table-column>
+      <el-table-column label="量比" min-width="80" prop="f10" sortable></el-table-column>
 
-<!--      <el-table-column label="涨停" min-width="80" prop="high" sortable></el-table-column>
-      <el-table-column label="跌停" min-width="80" prop="limit_down" sortable></el-table-column>-->
+      <el-table-column label="成交量" min-width="120" prop="f5" sortable></el-table-column>
+      <el-table-column label="成交额" min-width="120" prop="f6" sortable></el-table-column>
 
-<!--      <el-table-column label="最高" min-width="80" prop="chg" sortable></el-table-column>
-      <el-table-column label="最低" min-width="80" prop="low" sortable></el-table-column>-->
-
-      <el-table-column label="成交量" min-width="120" prop="volume" sortable></el-table-column>
-      <el-table-column label="成交额" min-width="120" prop="amount" sortable></el-table-column>
-
-<!--      <el-table-column label="今开" min-width="80" prop="open" sortable></el-table-column>
-      <el-table-column label="昨收" min-width="80" prop="last_close" sortable></el-table-column>-->
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button @click="addStockMonitorDay(scope.row)" size="small" type="primary">监控</el-button>
@@ -112,7 +104,7 @@
         this.getTableData()
       },
       async addStockMonitorDay(row) {
-        const res = await addMonitor({isDay:true,symbol: row.symbol})
+        const res = await addMonitor({isDay:true,code: row.f12})
         if (res.code === 0) {
           this.$message({
             type: 'success',
@@ -128,9 +120,9 @@
     },
     created(){
       this.getTableData()
-      setInterval(()=>{
-        this.getTableData()
-      },10000)
+      // setInterval(()=>{
+      //   this.getTableData()
+      // },10000)
     }
   }
 </script>

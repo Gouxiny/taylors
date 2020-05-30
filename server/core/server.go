@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"net/http"
+	"taylors/crawler"
 	"taylors/cron_job"
 	"taylors/global"
 	"taylors/initialize"
@@ -14,6 +15,7 @@ func RunWindowsServer() {
 		// 初始化redis服务
 		initialize.Redis()
 	}
+	go crawler.NewDongFangCrawler().Loop()
 	cron_job.Start()
 	Router := initialize.Routers()
 	Router.Static("/form-generator", "./resource/page")

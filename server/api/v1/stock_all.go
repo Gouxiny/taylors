@@ -19,14 +19,14 @@ type stockAll int
 // @Param data body request.AllDetailListReq true "获取所有列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /stock/all/list [post]
-func (*stockAll) StockAllDetailList(c *gin.Context) {
-	var req request.AllDetailListReq
+func (*stockAll) StockAllList(c *gin.Context) {
+	var req request.AllListReq
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.FailWithMessage(fmt.Sprintf("参数错误，%v", err), c)
 		return
 	}
 
-	stockList, err := service.StockAllService.AllDetailList()
+	stockList, err := service.StockAllService.AllList()
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取失败，%v", err), c)
 	} else {

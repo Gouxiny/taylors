@@ -12,7 +12,7 @@ func init() {
 }
 
 func Start() {
-	_, err := cronObj.AddJob(global.GVA_CONFIG.Cron.SpecAll, AllJob)
+	_, err := cronObj.AddJob(global.GVA_CONFIG.Cron.SpecAll, MarketJob)
 	if err != nil {
 		global.GVA_LOG.Error("添加定时任务失败:", err)
 		return

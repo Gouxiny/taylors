@@ -15,7 +15,6 @@ import (
 // @name x-token
 // @BasePath /
 func main() {
-	initialize.InitModule()
 	switch global.GVA_CONFIG.System.DbType {
 	case "mysql":
 		initialize.Mysql()

@@ -10,7 +10,7 @@
           </el-col>
           <el-col :span="5">
             <el-form-item label="编码">
-              <el-input placeholder="SZ0000001"  v-model="searchInfo.symbol"></el-input>
+              <el-input placeholder="SZ0000001"  v-model="searchInfo.code"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -67,16 +67,16 @@
       </el-form>
     </div>
     <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
-      <el-table-column label="名称" min-width="70" prop="name"></el-table-column>
-      <el-table-column label="编码" min-width="70" prop="symbol"></el-table-column>
-      <el-table-column label="市值" min-width="80" prop="market_capital" sortable ></el-table-column>
-      <el-table-column label="当前价" min-width="80" prop="current" sortable ></el-table-column>
+      <el-table-column label="名称" min-width="70" prop="f14"></el-table-column>
+      <el-table-column label="编码" min-width="70" prop="f12"></el-table-column>
+      <el-table-column label="市值" min-width="80" prop="f20" sortable ></el-table-column>
+      <el-table-column label="当前价" min-width="80" prop="f2" sortable ></el-table-column>
 
-      <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
-      <el-table-column label="量比" min-width="80" prop="volume_ratio" sortable></el-table-column>
+      <el-table-column label="涨幅" min-width="80" prop="f3" sortable></el-table-column>
+      <el-table-column label="量比" min-width="80" prop="f10" sortable></el-table-column>
 
-      <el-table-column label="成交量" min-width="120" prop="volume" sortable></el-table-column>
-      <el-table-column label="成交额" min-width="120" prop="amount" sortable></el-table-column>
+      <el-table-column label="成交量" min-width="120" prop="f5" sortable></el-table-column>
+      <el-table-column label="成交额" min-width="120" prop="f6" sortable></el-table-column>
       <el-table-column label="高位预警" min-width="120" prop="monitor_high" sortable></el-table-column>
       <el-table-column label="低位预警" min-width="120" prop="monitor_low" sortable></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
@@ -89,8 +89,8 @@
 
     <el-dialog :before-close="closeDialog" :title="dialogTitle" :visible.sync="dialogFormVisible">
       <el-form :inline="true" :model="form" :rules="rules" label-width="80px" ref="stockMonitorForm">
-        <el-form-item label="编码" prop="symbol">
-          <el-input autocomplete="off" v-model="form.symbol"></el-input>
+        <el-form-item label="编码" prop="code">
+          <el-input autocomplete="off" v-model="form.code"></el-input>
         </el-form-item>
         <el-form-item label="高位预警" prop="monitor_high">
           <el-input-number placeholder="1.2" v-model="form.monitor_high" :controls="false"></el-input-number>
@@ -148,7 +148,7 @@
       return {
         dialogTitle: '新增监控',
         form: {
-          symbol: '',
+          code: '',
           monitor_high: 0,
           monitor_low: 0
         },
@@ -156,7 +156,7 @@
         listApi: getMonitorList,
         searchInfo: {
           name:undefined,
-          symbol:undefined,
+          code:undefined,
           currentMax:undefined,
           currentMin:undefined,
           marketCapitalMin: undefined,
@@ -204,7 +204,7 @@
               case 'add':
               {
                 const res = await addMonitor(this.form)
-                if (res.code == 0) {
+                if (res.code === 0) {
                   this.$message({
                     type: 'success',
                     message: '添加成功',
@@ -219,7 +219,7 @@
               case 'edit':
               {
                 const res = await updateMonitor(this.form)
-                if (res.code == 0) {
+                if (res.code === 0) {
                   this.$message({
                     type: 'success',
                     message: '编辑成功',
@@ -255,7 +255,7 @@
       initForm() {
         this.$refs.stockMonitorForm.resetFields()
         this.form= {
-          symbol: '',
+          code: '',
           monitor_high: undefined,
           monitor_low: undefined
         }
@@ -267,7 +267,7 @@
           type: 'warning'
         }).then(async () => {
             const res = await delMonitor(row)
-            if (res.code == 0) {
+            if (res.code === 0) {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
@@ -285,9 +285,9 @@
     },
     created(){
       this.getTableData()
-      setInterval(()=>{
-        this.getTableData()
-      },20000)
+      // setInterval(()=>{
+      //   this.getTableData()
+      // },20000)
     }
   }
 </script>

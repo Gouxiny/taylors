@@ -10,7 +10,7 @@ type Server struct {
 	JWT     JWT     `mapstructure:"jwt" json:"jwt" yaml:"jwt"`
 	Captcha Captcha `mapstructure:"captcha" json:"captcha" yaml:"captcha"`
 	Log     Log     `mapstructure:"log" json:"log" yaml:"log"`
-	Module  Module  `mapstructure:"module" json:"module" yaml:"module"`
+	Crawler Crawler `mapstructure:"crawler" json:"crawler" yaml:"crawler"`
 	Cron    Cron    `mapstructure:"cron" json:"cron" yaml:"cron"`
 }
 
@@ -73,8 +73,10 @@ type Sqlite struct {
 	LogMode  bool   `mapstructure:"log-mode" json:"logMode" yaml:"log-mode"`
 }
 
-type Module struct {
-	Crawler string `mapstructure:"crawler" json:"crawler" yaml:"crawler"`
+type Crawler struct {
+	Url   string `mapstructure:"url" json:"url" yaml:"url"`
+	Env   string `mapstructure:"env" json:"env" yaml:"env"`
+	Sleep int    `mapstructure:"sleep" json:"sleep" yaml:"sleep"`
 }
 
 type Cron struct {

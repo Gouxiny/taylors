@@ -1,8 +1,8 @@
 package request
 
 type StockTopListReq struct {
-	MarketCapitalMax float64 `json:"marketCapitalMax" desc:"市值范围最大" `
-	MarketCapitalMin float64 `json:"marketCapitalMin" desc:"市值范围最小" `
+	MarketCapitalMax int64   `json:"marketCapitalMax" desc:"市值范围最大" `
+	MarketCapitalMin int64   `json:"marketCapitalMin" desc:"市值范围最小" `
 	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `
 	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
 	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
@@ -11,7 +11,7 @@ type StockTopListReq struct {
 	CurrentMin       float64 `json:"currentMin" desc:"股价范围最小" `
 }
 
-type AllDetailListReq struct {
+type AllListReq struct {
 	PageNum  int `json:"page_num" desc:"页数" `
 	PageSize int `json:"page_size" desc:"每页数量" `
 }
@@ -23,9 +23,9 @@ type MonitorOneReq struct {
 type MonitorListReq struct {
 	IsDay            bool    `json:"isDay" desc:"是否日监控" `
 	Name             string  `json:"name" desc:"名称" `
-	Symbol           string  `json:"symbol" desc:"编码" `
-	MarketCapitalMax float64 `json:"marketCapitalMax" desc:"市值范围最大" `
-	MarketCapitalMin float64 `json:"marketCapitalMin" desc:"市值范围最小" `
+	Code             string  `json:"code" desc:"编码" `
+	MarketCapitalMax int64   `json:"marketCapitalMax" desc:"市值范围最大" `
+	MarketCapitalMin int64   `json:"marketCapitalMin" desc:"市值范围最小" `
 	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `
 	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
 	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
@@ -36,7 +36,7 @@ type MonitorListReq struct {
 
 type AddMonitorReq struct {
 	IsDay       bool    `json:"isDay" desc:"是否日监控" `
-	Symbol      string  `json:"symbol" desc:"编码" `
+	Code        string  `json:"code" desc:"编码" `
 	MonitorHigh float64 `json:"monitor_high" desc:"高位预警" `
 	MonitorLow  float64 `json:"monitor_low" desc:"低位预警" `
 }
