@@ -21,6 +21,9 @@ func (*stockAllService) AllList(allListParam *param.AllListParam) (stockList []*
 
 	allListParam.CreateTime = t.Unix()
 	stockList, total, err = dao.StockDao.AllList(allListParam)
+	for _, stock := range stockList {
+		stock.MarketCapital = stock.MarketCapital / 100000000
+	}
 	return
 }
 

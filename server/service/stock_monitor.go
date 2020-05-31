@@ -97,6 +97,9 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 				continue
 			}
 		}
+
+		stock.MarketCapital = stock.MarketCapital / 100000000
+
 		monitorModel := response.StockMonitorModel{}
 		monitorModel.Stock = stock
 		stockPO, ok := monitorMap[stock.Code]

@@ -14,6 +14,8 @@ func (*stockAnalysisService) AnalysisList(filter *param.AnalysisListParam) (stoc
 	if err != nil {
 		return
 	}
-
+	for _, stock := range stockList {
+		stock.MarketCapital = stock.MarketCapital / 100000000
+	}
 	return
 }
