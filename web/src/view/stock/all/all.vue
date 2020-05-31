@@ -61,12 +61,9 @@
         <el-form-item>
           <el-button @click="onSubmit" type="primary">查询</el-button>
         </el-form-item>
-        <el-form-item>
-          <el-button @click="openDialog('add')" type="primary">新增监控</el-button>
-        </el-form-item>
       </el-form>
     </div>
-    <el-table :data="tableData" border stripe :default-sort = "{prop: ['f14','f12','f20','f2','f3','f10','f5','f6'], order: 'descending'}">
+    <el-table :data="tableData" border stripe :default-sort = "{prop: ['f20','f2','f3','f10','f5','f6'], order: 'descending'}">
       <el-table-column label="名称" min-width="50" prop="f14"></el-table-column>
       <el-table-column label="编码" min-width="50" prop="f12"></el-table-column>
 

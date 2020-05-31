@@ -66,7 +66,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
+    <el-table :data="tableData" border stripe :default-sort = "{prop: ['f20','f2','f3','f10','f5','f6'], order: 'descending'}">
       <el-table-column label="名称" min-width="70" prop="f14"></el-table-column>
       <el-table-column label="编码" min-width="70" prop="f12"></el-table-column>
       <el-table-column label="市值" min-width="80" prop="f20" sortable ></el-table-column>
@@ -79,10 +79,10 @@
       <el-table-column label="成交额" min-width="120" prop="f6" sortable></el-table-column>
       <el-table-column label="高位预警" min-width="120" prop="monitor_high" sortable></el-table-column>
       <el-table-column label="低位预警" min-width="120" prop="monitor_low" sortable></el-table-column>
-      <el-table-column fixed="right" label="操作" width="200">
+      <el-table-column label="操作" width="200">
         <template slot-scope="scope">
-          <el-button @click="editStockMonitor(scope.row)" size="small" type="primary">编辑</el-button>
-          <el-button @click="deleteStockMonitor(scope.row)" size="small" type="danger">删除</el-button>
+          <el-button @click="editStockMonitor(scope.row)" size="small"  style="float: right;" type="primary" >编辑</el-button>
+          <el-button @click="deleteStockMonitor(scope.row)" size="small" style="float: left;" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
