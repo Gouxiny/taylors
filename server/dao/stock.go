@@ -87,6 +87,11 @@ func (dao *stockModel) AllList(allListParam *param.AllListParam) (stockList []*m
 	return
 }
 
+func (dao *stockModel) CodeList() (stockList []*model.Stock, err error) {
+	err = dao.Db.Exec("select code from stock group by code").Find(&stockList).Error
+	return
+}
+
 func (dao *stockModel) AnalysisList(filter *param.AnalysisListParam) (stockList []*model.Stock, err error) {
 	db := dao.Db
 
