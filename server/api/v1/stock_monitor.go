@@ -48,6 +48,10 @@ func (*stockMonitor) StockMonitorList(c *gin.Context) {
 		response.FailWithMessage(fmt.Sprintf("参数错误，%v", err), c)
 		return
 	}
+
+	req.MarketCapitalMax *= 100000000
+	req.MarketCapitalMin *= 100000000
+
 	claims, _ := c.Get("claims")
 	waitUse := claims.(*request.CustomClaims)
 	stockList, err := service.StockMonitorService.MonitorList(waitUse.ID, req)

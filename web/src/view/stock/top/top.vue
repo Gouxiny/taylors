@@ -101,19 +101,7 @@
     methods: {
       //搜索
       onSubmit() {
-        if (this.searchInfo.marketCapitalMin !== undefined) {
-          this.searchInfo.marketCapitalMin *= 100000000
-        }
-        if (this.searchInfo.marketCapitalMax !== undefined) {
-          this.searchInfo.marketCapitalMax *= 100000000
-        }
         this.getTableData()
-        if (this.searchInfo.marketCapitalMin !== undefined) {
-          this.searchInfo.marketCapitalMin /= 100000000
-        }
-        if (this.searchInfo.marketCapitalMax !== undefined) {
-          this.searchInfo.marketCapitalMax /= 100000000
-        }
       },
       async addStockMonitorDay(row) {
         const res = await addMonitor({isDay:true,code: row.f12})
