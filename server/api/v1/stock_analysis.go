@@ -10,24 +10,24 @@ import (
 	"taylors/service"
 )
 
-type stockAll int
+type stockAnalysis int
 
 // @Tags Stock
-// @Summary 获取所有列表
+// @Summary 获取数据分析列表
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
 // @Param data body request.AllDetailListReq true "获取所有列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /stock/all/list [post]
-func (*stockAll) StockAllList(c *gin.Context) {
-	var req request.AllListReq
+// @Router /stock/analysis/list [post]
+func (*stockAnalysis) StockAnalysisList(c *gin.Context) {
+	var req request.AnalysisListReq
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.FailWithMessage(fmt.Sprintf("参数错误，%v", err), c)
 		return
 	}
 
-	param := &param.AllListParam{
+	param := &param.AnalysisListParam{
 		Page:             req.Page,
 		PageSize:         req.PageSize,
 		Name:             req.Name,
@@ -40,9 +40,12 @@ func (*stockAll) StockAllList(c *gin.Context) {
 		VolumeRatioMin:   req.VolumeRatioMin,
 		CurrentMax:       req.CurrentMax,
 		CurrentMin:       req.CurrentMin,
+		StartTime:        req.StartTime,
+		EndTime:          req.EndTime,
+		DayMin:           req.DayMin,
 	}
 
-	stockList, total, err := service.StockAllService.AllList(param)
+	stockList, total, err := service.StockAnalysisService.AnalysisList(param)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取失败，%v", err), c)
 	} else {

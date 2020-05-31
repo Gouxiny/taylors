@@ -41,8 +41,10 @@ type Stock struct {
 	F141 string `gorm:"column:f141" json:"f141"`
 	F136 string `gorm:"column:f136" json:"f136"`
 
-	F152       int   `gorm:"column:f152" json:"f152"`
-	CreateTime int64 `gorm:"column:create_time" json:"create_time"`
+	F152 int `gorm:"column:f152" json:"f152"`
+
+	BatchCode  string `gorm:"column:batch_code" json:"batch_code"`
+	CreateTime int64  `gorm:"column:create_time" json:"create_time"`
 }
 
 func (Stock) TableName() string {

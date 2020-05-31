@@ -12,8 +12,17 @@ type StockTopListReq struct {
 }
 
 type AllListReq struct {
-	PageNum  int `json:"page_num" desc:"页数" `
-	PageSize int `json:"page_size" desc:"每页数量" `
+	PageInfo
+	Name             string  `json:"name" desc:"名称" `
+	Code             string  `json:"code" desc:"编码" `
+	MarketCapitalMax int64   `json:"marketCapitalMax" desc:"市值范围最大" `
+	MarketCapitalMin int64   `json:"marketCapitalMin" desc:"市值范围最小" `
+	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `
+	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
+	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
+	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
+	CurrentMax       float64 `json:"currentMax" desc:"股价范围最大" `
+	CurrentMin       float64 `json:"currentMin" desc:"股价范围最小" `
 }
 
 type MonitorOneReq struct {
@@ -49,4 +58,21 @@ type UpdateMonitorReq struct {
 	Id          int64   `json:"id" desc:"key" `
 	MonitorHigh float64 `json:"monitor_high" desc:"高位预警" `
 	MonitorLow  float64 `json:"monitor_low" desc:"低位预警" `
+}
+
+type AnalysisListReq struct {
+	PageInfo
+	Name             string  `json:"name" desc:"名称" `
+	Code             string  `json:"code" desc:"编码" `
+	MarketCapitalMax int64   `json:"marketCapitalMax" desc:"市值范围最大" `
+	MarketCapitalMin int64   `json:"marketCapitalMin" desc:"市值范围最小" `
+	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `
+	PercentMin       float64 `json:"percentMin" desc:"涨幅范围最小" `
+	VolumeRatioMax   float64 `json:"volume_ratio_max" desc:"量比范围最大" `
+	VolumeRatioMin   float64 `json:"volume_ratio_min" desc:"量比范围最小" `
+	CurrentMax       float64 `json:"currentMax" desc:"股价范围最大" `
+	CurrentMin       float64 `json:"currentMin" desc:"股价范围最小" `
+	StartTime        int64   `json:"startTime" desc:"开始时间" `
+	EndTime          int64   `json:"endTime" desc:"结束时间" `
+	DayMin           int     `json:"dayMin" desc:"最少天数" `
 }

@@ -1,8 +1,8 @@
 package cron_job
 
 import (
+	"github.com/satori/go.uuid"
 	"taylors/dao"
-	"taylors/model"
 	"taylors/service"
 	"time"
 )
@@ -10,7 +10,6 @@ import (
 var MarketJob *marketJob
 
 type marketJob struct {
-	List []model.Stock
 }
 
 func init() {
@@ -26,15 +25,18 @@ func (job *marketJob) Run() {
 		return
 	}
 
-	stockList, err := service.StockAllService.AllList()
+	stockList, err := service.StockAllService.AllListByCrawler()
 	if err != nil {
 		return
 	}
 
+	batchCode := uuid.NewV4().String()
 	if stockList != nil && len(stockList) > 0 {
 		for _, stock := range stockList {
 			stock.CreateTime = time.Now().Unix()
+			stock.BatchCode = batchCode
 			_ = dao.StockDao.Save(stock)
 		}
 	}
+
 }

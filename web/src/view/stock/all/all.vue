@@ -2,82 +2,122 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-          <el-row>
-            <el-col :span="5">
-              <el-form-item label="市值">
-                <el-input placeholder="最小" type="number" v-model="searchInfo.marketCapitalMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="5">
-              <el-form-item label="">
-                <el-input placeholder="最大" type="number" v-model="searchInfo.marketCapitalMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
         <el-row>
-          <el-col :span="5">
-            <el-form-item label="涨幅">
-              <el-input placeholder="最小" type="number" v-model="searchInfo.percentMin" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+          <el-col :span="10">
+            <el-form-item label="名称">
+              <el-input placeholder="平安银行" v-model="searchInfo.name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item label="">
-              <el-input placeholder="最大" type="number" v-model="searchInfo.percentMax" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            <el-form-item label="编码">
+              <el-input placeholder="SZ0000001"  v-model="searchInfo.code"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="5">
-            <el-form-item label="量比">
-              <el-input placeholder="最小" type="number" v-model="searchInfo.volume_ratio_min" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+            <el-form-item label="市值">
+              <el-input-number placeholder="最小" v-model="searchInfo.marketCapitalMin" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input placeholder="最大" type="number" v-model="searchInfo.volume_ratio_max" oninput="value=value.replace(/[^0-9.]/g,'')"></el-input>
+              <el-input-number placeholder="最大"  v-model="searchInfo.marketCapitalMax" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="股价">
+              <el-input-number placeholder="最小" v-model="searchInfo.currentMin" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input-number placeholder="最大"  v-model="searchInfo.currentMax" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="涨幅">
+              <el-input-number placeholder="最小"  v-model="searchInfo.percentMin" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input-number placeholder="最大"  v-model="searchInfo.percentMax" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="量比">
+              <el-input-number placeholder="最小"  v-model="searchInfo.volume_ratio_min" :controls="false"></el-input-number>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <el-input-number placeholder="最大"  v-model="searchInfo.volume_ratio_max" :controls="false"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item>
           <el-button @click="onSubmit" type="primary">查询</el-button>
         </el-form-item>
+        <el-form-item>
+          <el-button @click="openDialog('add')" type="primary">新增监控</el-button>
+        </el-form-item>
       </el-form>
     </div>
-    <el-table :data="tableData" border stripe :default-sort = "{prop: ['market_capital','percent','volume_ratio','high','limit_down','chg','low','volume','amount','open','last_close'], order: 'descending'}">
-      <el-table-column label="名称" min-width="150" prop="symbol"></el-table-column>
-      <el-table-column label="市值" min-width="130" prop="market_capital" sortable ></el-table-column>
+    <el-table :data="tableData" border stripe :default-sort = "{prop: ['f14','f12','f20','f2','f3','f10','f5','f6'], order: 'descending'}">
+      <el-table-column label="名称" min-width="50" prop="f14"></el-table-column>
+      <el-table-column label="编码" min-width="50" prop="f12"></el-table-column>
 
-      <el-table-column label="涨幅" min-width="80" prop="percent" sortable></el-table-column>
-      <el-table-column label="量比" min-width="80" prop="volume_ratio" sortable></el-table-column>
+      <el-table-column label="市值" min-width="70" prop="f20" sortable ></el-table-column>
+      <el-table-column label="当前价" min-width="70" prop="f2" sortable></el-table-column>
 
-      <el-table-column label="涨停" min-width="80" prop="high" sortable></el-table-column>
-      <el-table-column label="跌停" min-width="80" prop="limit_down" sortable></el-table-column>
+      <el-table-column label="涨幅" min-width="80" prop="f3" sortable></el-table-column>
+      <el-table-column label="量比" min-width="80" prop="f10" sortable></el-table-column>
 
-      <el-table-column label="最高" min-width="80" prop="chg" sortable></el-table-column>
-      <el-table-column label="最低" min-width="80" prop="low" sortable></el-table-column>
+      <el-table-column label="成交量" min-width="120" prop="f5" sortable></el-table-column>
+      <el-table-column label="成交额" min-width="120" prop="f6" sortable></el-table-column>
 
-      <el-table-column label="成交量" min-width="120" prop="volume" sortable></el-table-column>
-      <el-table-column label="成交额" min-width="120" prop="amount" sortable></el-table-column>
-
-      <el-table-column label="今开" min-width="80" prop="open" sortable></el-table-column>
-      <el-table-column label="昨收" min-width="80" prop="last_close" sortable></el-table-column>
+      <el-table-column fixed="right" label="操作" width="100">
+        <template slot-scope="scope">
+          <el-button @click="addStockMonitorDay(scope.row)" size="small" type="primary">监控</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+    <el-pagination
+            :current-page="page"
+            :page-size="pageSize"
+            :page-sizes="[10, 30, 50, 100]"
+            :style="{float:'right',padding:'20px'}"
+            :total="total"
+            @current-change="handleCurrentChange"
+            @size-change="handleSizeChange"
+            layout="total, sizes, prev, pager, next, jumper"
+    ></el-pagination>
   </div>
 </template>
 
 
 <script>
   import {
-    getTopList
-  } from '@/api/stockTop'
+    addMonitor
+  } from '@/api/stockMonitor'
+  import {
+    getAllList
+  } from '@/api/stockAll'
   import infoList from '@/components/mixins/infoList'
   export default {
     name: 'Top',
     mixins: [infoList],
     data() {
       return {
-        listApi: getTopList,
+        listApi: getAllList,
         searchInfo: {
+          name:undefined,
+          code:undefined,
+          currentMax:undefined,
+          currentMin:undefined,
           marketCapitalMin: undefined,
           marketCapitalMax: undefined,
           percentMin: undefined,
@@ -90,33 +130,41 @@
     methods: {
       //搜索
       onSubmit() {
-        this.tableList()
-        setInterval(()=>{
-          this.tableList()
-        },20000)
-      },
-      tableList(){
-        this.searchInfo.marketCapitalMin = parseFloat(this.searchInfo.marketCapitalMin)
-        this.searchInfo.marketCapitalMax = parseFloat(this.searchInfo.marketCapitalMax)
-        this.searchInfo.percentMin = parseFloat(this.searchInfo.percentMin)
-        this.searchInfo.percentMax = parseFloat(this.searchInfo.percentMax)
-        this.searchInfo.volume_ratio_min = parseFloat(this.searchInfo.volume_ratio_min)
-        this.searchInfo.volume_ratio_max = parseFloat(this.searchInfo.volume_ratio_max)
+        this.page = 1
+        this.pageSize = 10
         this.getTableData()
+      },
+      async addStockMonitorDay(row) {
+        const res = await addMonitor({isDay:false,code: row.f12})
+        if (res.code === 0) {
+          this.$message({
+            type: 'success',
+            message: '监控成功!'
+          })
+        }else{
+          this.$message({
+            type: 'error',
+            message: '监控失败!'
+          })
+        }
       }
     },
     created(){
-      this.tableList()
+      this.getTableData()
+      // setInterval(()=>{
+      //   this.getTableData()
+      // },10000)
     }
   }
 </script>
 <style scoped lang="scss">
   .button-box {
     padding: 10px 20px;
+  }
   .el-button {
     float: right;
   }
-  }
+
   .el-tag--mini {
     margin-left: 5px;
   }
