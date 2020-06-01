@@ -17,7 +17,7 @@ type stockAnalysis int
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.AllDetailListReq true "获取所有列表"
+// @Param data body request.AnalysisListReq true "获取数据分析列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /stock/analysis/list [post]
 func (*stockAnalysis) StockAnalysisList(c *gin.Context) {

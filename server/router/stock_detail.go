@@ -23,4 +23,9 @@ func InitStockRouter(Router *gin.RouterGroup) {
 		StockRouter.POST("monitor/del", v1.StockMonitorCon.DelMonitor)
 		StockRouter.POST("monitor/update", v1.StockMonitorCon.UpdateMonitor)
 	}
+
+	{
+		StockRouter.POST("analysis/list", v1.StockAnalysisCon.StockAnalysisList)
+	}
+
 }
