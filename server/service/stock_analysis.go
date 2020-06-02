@@ -61,7 +61,7 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 
 		for _, stock := range stockCodeList {
 			wg.Add(1)
-			go func(stockObj *model.Stock) {
+			func(stockObj *model.Stock) {
 				defer wg.Done()
 				stockPOList, err := dao.StockDao.FindByAnalysisFilter(stockObj.Code, filter.StartTime, filter.EndTime)
 				if err != nil {
@@ -131,9 +131,6 @@ func (*stockAnalysisService) CalculateScore(stockList []*model.Stock) (score flo
 func (*stockAnalysisService) SearchFilter(stockList []*model.Stock, filter *param.AnalysisListParam) (isAdd bool) {
 	//条件满足最小天数
 	day := filter.DayMin
-	if day < 1 {
-		day = 1
-	}
 
 	currentMaxCount := 0
 	currentMinCount := 0
@@ -190,28 +187,28 @@ func (*stockAnalysisService) SearchFilter(stockList []*model.Stock, filter *para
 		}
 	}
 
-	if currentMaxCount < day {
+	if filter.CurrentMax > 0 && currentMaxCount < day {
 		return
 	}
-	if currentMinCount < day {
+	if filter.CurrentMin > 0 && currentMinCount < day {
 		return
 	}
-	if volumeRatioMaxCount < day {
+	if filter.VolumeRatioMax > 0 && volumeRatioMaxCount < day {
 		return
 	}
-	if volumeRatioMinCount < day {
+	if filter.VolumeRatioMin > 0 && volumeRatioMinCount < day {
 		return
 	}
-	if percentMaxCount < day {
+	if filter.PercentMax > 0 && percentMaxCount < day {
 		return
 	}
-	if percentMinCount < day {
+	if filter.PercentMin > 0 && percentMinCount < day {
 		return
 	}
-	if marketCapitalMaxCount < day {
+	if filter.MarketCapitalMax > 0 && marketCapitalMaxCount < day {
 		return
 	}
-	if marketCapitalMinCount < day {
+	if filter.MarketCapitalMin > 0 && marketCapitalMinCount < day {
 		return
 	}
 
