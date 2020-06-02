@@ -19,8 +19,6 @@ type AllListParam struct {
 type AnalysisListParam struct {
 	Page             int
 	PageSize         int
-	Name             string
-	Code             string
 	MarketCapitalMax int64
 	MarketCapitalMin int64
 	PercentMax       float64

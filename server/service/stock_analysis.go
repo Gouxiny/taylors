@@ -63,10 +63,18 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 			wg.Add(1)
 			go func(stockObj *model.Stock) {
 				defer wg.Done()
-				stockPOList, err := dao.StockDao.FindByCode(stockObj.Code)
+				stockPOList, err := dao.StockDao.FindByAnalysisFilter(stockObj.Code, filter.StartTime, filter.EndTime)
 				if err != nil {
 					return
 				}
+
+				if len(stockPOList) == 0 {
+					return
+				}
+				if !analy.SearchFilter(stockPOList, filter) {
+					return
+				}
+
 				calculateScore := analy.CalculateScore(stockPOList)
 				analysisCh <- &analysisModel{
 					score: calculateScore,
@@ -101,6 +109,8 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 			stockList = nil
 			break
 		}
+
+		stockPO.MarketCapital /= 100000000
 		stockList = append(stockList, stockPO)
 	}
 	return
@@ -114,6 +124,98 @@ func (*stockAnalysisService) CalculateScore(stockList []*model.Stock) (score flo
 	for _, stock := range stockList {
 		score += float32(stock.Percent)
 	}
+
+	return
+}
+
+func (*stockAnalysisService) SearchFilter(stockList []*model.Stock, filter *param.AnalysisListParam) (isAdd bool) {
+	//条件满足最小天数
+	day := filter.DayMin
+	if day < 1 {
+		day = 1
+	}
+
+	currentMaxCount := 0
+	currentMinCount := 0
+	volumeRatioMaxCount := 0
+	volumeRatioMinCount := 0
+	percentMaxCount := 0
+	percentMinCount := 0
+	marketCapitalMaxCount := 0
+	marketCapitalMinCount := 0
+
+	for _, stockPO := range stockList {
+		if filter.CurrentMax > 0 {
+			if stockPO.Current < filter.CurrentMax {
+				currentMaxCount++
+			}
+		}
+		if filter.CurrentMin > 0 {
+			if stockPO.Current > filter.CurrentMin {
+				currentMinCount++
+			}
+		}
+
+		if filter.VolumeRatioMax > 0 {
+			if stockPO.VolumeRatio < filter.VolumeRatioMax {
+				volumeRatioMaxCount++
+			}
+		}
+		if filter.VolumeRatioMin > 0 {
+			if stockPO.VolumeRatio > filter.VolumeRatioMin {
+				volumeRatioMinCount++
+			}
+		}
+
+		if filter.PercentMax > 0 {
+			if stockPO.Percent < filter.PercentMax {
+				percentMaxCount++
+			}
+		}
+		if filter.PercentMin > 0 {
+			if stockPO.Percent > filter.PercentMin {
+				percentMinCount++
+			}
+		}
+
+		if filter.MarketCapitalMax > 0 {
+			if stockPO.MarketCapital < filter.MarketCapitalMax {
+				marketCapitalMaxCount++
+			}
+		}
+		if filter.MarketCapitalMin > 0 {
+			if stockPO.MarketCapital > filter.MarketCapitalMin {
+				marketCapitalMinCount++
+			}
+		}
+	}
+
+	if currentMaxCount < day {
+		return
+	}
+	if currentMinCount < day {
+		return
+	}
+	if volumeRatioMaxCount < day {
+		return
+	}
+	if volumeRatioMinCount < day {
+		return
+	}
+	if percentMaxCount < day {
+		return
+	}
+	if percentMinCount < day {
+		return
+	}
+	if marketCapitalMaxCount < day {
+		return
+	}
+	if marketCapitalMinCount < day {
+		return
+	}
+
+	isAdd = true
 
 	return
 }

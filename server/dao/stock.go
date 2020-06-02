@@ -22,6 +22,24 @@ func (dao *stockModel) Save(stock model.Stock) (err error) {
 	return
 }
 
+func (dao *stockModel) FindByAnalysisFilter(code string, startTime, endTime int64) (stockList []*model.Stock, err error) {
+	db := dao.Db
+	if code != "" {
+		db = db.Where("code = ?", code)
+	}
+
+	if startTime > 0 {
+		db = db.Where("create_time > ?", startTime)
+	}
+	if endTime > 0 {
+		db = db.Where("create_time < ?", endTime)
+	}
+
+	err = db.Find(&stockList).Error
+
+	return
+}
+
 func (dao *stockModel) FindByCode(code string) (stockList []*model.Stock, err error) {
 	err = dao.Db.Where("code = ? ", code).Order("create_time desc").Find(&stockList).Error
 	return
@@ -100,13 +118,6 @@ func (dao *stockModel) CodeList() (stockList []*model.Stock, err error) {
 
 func (dao *stockModel) AnalysisList(filter *param.AnalysisListParam) (stockList []*model.Stock, err error) {
 	db := dao.Db
-
-	if filter.Code != "" {
-		db = db.Where("code LIKE ?", "%"+filter.Code+"%")
-	}
-	if filter.Name != "" {
-		db = db.Where("name LIKE ?", "%"+filter.Name+"%")
-	}
 
 	if filter.MarketCapitalMax != 0 {
 		db = db.Where("market_capital <= ?", filter.MarketCapitalMax)

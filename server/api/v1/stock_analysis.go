@@ -30,8 +30,6 @@ func (*stockAnalysis) StockAnalysisList(c *gin.Context) {
 	param := &param.AnalysisListParam{
 		Page:             req.Page,
 		PageSize:         req.PageSize,
-		Name:             req.Name,
-		Code:             req.Code,
 		MarketCapitalMax: int64(req.MarketCapitalMax * 100000000),
 		MarketCapitalMin: int64(req.MarketCapitalMin * 100000000),
 		PercentMax:       req.PercentMax,
