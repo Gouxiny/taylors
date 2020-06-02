@@ -61,7 +61,7 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 
 		for _, stock := range stockCodeList {
 			wg.Add(1)
-			func(stockObj *model.Stock) {
+			go func(stockObj *model.Stock) {
 				defer wg.Done()
 				stockPOList, err := dao.StockDao.FindByAnalysisFilter(stockObj.Code, filter.StartTime, filter.EndTime)
 				if err != nil {

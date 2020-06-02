@@ -2,18 +2,6 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-<!--        <el-row>-->
-<!--          <el-col :span="10">-->
-<!--            <el-form-item label="名称">-->
-<!--              <el-input placeholder="平安银行" v-model="searchInfo.name"></el-input>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="5">-->
-<!--            <el-form-item label="编码">-->
-<!--              <el-input placeholder="SZ0000001"  v-model="searchInfo.code"></el-input>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--        </el-row>-->
         <el-row>
           <el-col :span="5">
             <el-form-item label="市值">
@@ -157,8 +145,8 @@
       //搜索
       onSubmit() {
         if (this.rangeTimeArray !== undefined) {
-          this.searchInfo.startTime = new Date(this.rangeTimeArray[0]).getMilliseconds()
-          this.searchInfo.endTime = new Date(this.rangeTimeArray[1]).getMilliseconds()
+          this.searchInfo.startTime = new Date(this.rangeTimeArray[0]).getTime() / 1000
+          this.searchInfo.endTime = new Date(this.rangeTimeArray[1]).getTime() / 1000
         }
         this.page = 1
         this.pageSize = 10
