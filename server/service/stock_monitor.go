@@ -58,12 +58,12 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 		}
 
 		if filter.MarketCapitalMax > 0 {
-			if stock.MarketCapital > filter.MarketCapitalMax {
+			if stock.MarketCapital > int64(filter.MarketCapitalMax) {
 				continue
 			}
 		}
 		if filter.MarketCapitalMin > 0 {
-			if stock.MarketCapital < filter.MarketCapitalMin {
+			if stock.MarketCapital < int64(filter.MarketCapitalMin) {
 				continue
 			}
 		}

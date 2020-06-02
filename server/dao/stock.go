@@ -27,6 +27,12 @@ func (dao *stockModel) FindByCode(code string) (stockList []*model.Stock, err er
 	return
 }
 
+func (dao *stockModel) FindLastByCode(code string) (stock *model.Stock, err error) {
+	stock = &model.Stock{}
+	err = dao.Db.Where("code = ? ", code).Order("create_time desc").First(stock).Error
+	return
+}
+
 func (dao *stockModel) Max() (stock *model.Stock, err error) {
 	stock = &model.Stock{}
 	err = dao.Db.Order("create_time desc").Limit(1).First(stock).Error
