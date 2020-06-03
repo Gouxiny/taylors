@@ -5,15 +5,15 @@ FROM golang:alpine as builder
 ENV GOPROXY=https://goproxy.cn,https://goproxy.io,direct \
     GO111MODULE=on \
     CGO_ENABLED=1
-WORKDIR /ginvue
+WORKDIR /taylors
 RUN go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 COPY . .
 RUN go env && go list && go build -o app main.go
 
 EXPOSE 8888
-ENTRYPOINT /ginvue/app
+ENTRYPOINT /taylors/app
 
 # 根据Dockerfile生成Docker镜像
-# docker build -t ginvue .
+# docker build -t taylors .
 # 根据Docker镜像启动Docker容器
-# docker run -itd -p 8888:8888 --name ginvue ginvue
+# docker run -itd -p 8888:8888 --name taylors taylors
