@@ -19,6 +19,7 @@ func RunWindowsServer() {
 	cron_job.Start()
 	Router := initialize.Routers()
 	Router.Static("/form-generator", "./resource/page")
+	Router.Static("/index", "./resource/web")
 	address := fmt.Sprintf(":%d", global.GVA_CONFIG.System.Addr)
 	s := &http.Server{
 		Addr:           address,
