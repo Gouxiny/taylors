@@ -66,7 +66,7 @@
           </el-col>
           <el-col :span="5">
             <el-form-item label="天数">
-              <el-input-number placeholder="最小"  v-model="searchInfo.dayMin" :controls="false"></el-input-number>
+              <el-input-number v-model="searchInfo.dayMin" @change="handleChange" :min="1" :max="365" label="最小"></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
@@ -136,7 +136,7 @@
           volume_ratio_max: undefined,
           startTime:undefined,
           endTime:undefined,
-          dayMin:undefined
+          dayMin:1
         },
         rangeTimeArray:undefined
       }
