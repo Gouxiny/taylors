@@ -1,5 +1,4 @@
 FROM golang:alpine as builder
-
 # 设置go mod proxy 国内代理
 # 设置golang path
 ENV GOPROXY=https://goproxy.cn,https://goproxy.io,direct \
@@ -7,13 +6,12 @@ ENV GOPROXY=https://goproxy.cn,https://goproxy.io,direct \
     CGO_ENABLED=1
 WORKDIR /taylors
 RUN go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
-COPY . .
+ADD . /taylors
 RUN go env && go list && go build -o app main.go
 
-EXPOSE 8888
+EXPOSE 9999
 ENTRYPOINT /taylors/app
 
-# 根据Dockerfile生成Docker镜像
 # docker build -t taylors .
-# 根据Docker镜像启动Docker容器
-# docker run -itd -p 8888:8888 --name taylors taylors
+# docker run --name taylors -p 80:9999 -d taylors
+#
