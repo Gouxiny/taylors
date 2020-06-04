@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20fe86"],{b640:function(o,p,n){o.exports=n.p+"static/img/logo.dfd08270.jpg"}}]);
