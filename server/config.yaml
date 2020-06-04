@@ -19,7 +19,7 @@ crawler:
   sleep: 20
 mysql:
   username: root
-  password: zhangjun1595
+  password: zhangjun159555
   path: 172.17.82.72:3306
   db-name: taylors
   config: charset=utf8&parseTime=True&loc=Local
