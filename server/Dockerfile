@@ -8,6 +8,8 @@ WORKDIR /taylors
 RUN go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 ADD . /taylors
 RUN go env && go list && go build -o app main.go
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+  && echo 'Asia/Shanghai' >/etc/timezone \
 
 EXPOSE 9999
 ENTRYPOINT /taylors/app

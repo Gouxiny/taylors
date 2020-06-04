@@ -13,9 +13,10 @@ import (
 type dongFangCrawler struct {
 	dongFangModel *dongFang
 	url           string
-	topUrl        string
+	topCodes      []string
 	sleepTime     int
 	env           string // dev stage prod
+	lock          sync.RWMutex
 }
 
 var (
@@ -31,7 +32,6 @@ func NewDongFangCrawler() *dongFangCrawler {
 		dongFangCrawlerObj = &dongFangCrawler{
 			dongFangModel: &dongFang{},
 			url:           global.GVA_CONFIG.Crawler.Url,
-			topUrl:        strings.ReplaceAll(global.GVA_CONFIG.Crawler.Url, "5000", "100"),
 			sleepTime:     global.GVA_CONFIG.Crawler.Sleep,
 			env:           global.GVA_CONFIG.Crawler.Env,
 		}
@@ -98,25 +98,25 @@ func (crawler *dongFangCrawler) process() (dongFang *dongFang) {
 		return
 	}
 	dongFang, err = crawler.dongFangModel.JsonToModel(body)
-	return
-}
-
-func (crawler *dongFangCrawler) processTop() (dongFang *dongFang) {
-	body, err := crawler.get(crawler.topUrl)
 	if err != nil {
 		return
 	}
-	dongFang, err = crawler.dongFangModel.JsonToModel(body)
+
+	codes := []string{}
+	for i, diff := range dongFang.Data.Diff {
+		if i <= 100 {
+			codes = append(codes, diff.Code)
+		}
+	}
+
+	crawler.lock.Lock()
+	crawler.topCodes = codes
+	crawler.lock.Unlock()
 	return
 }
 
 func (crawler *dongFangCrawler) Top() (marketList []model.Stock) {
-	dongFangTop := crawler.processTop()
-	dongFangCodes := make([]string, 0)
-	for _, dongFang := range dongFangTop.Data.Diff {
-		dongFangCodes = append(dongFangCodes, dongFang.Code)
-	}
-	marketList = instence().obtain(dongFangCodes)
+	marketList = instence().obtain(crawler.topCodes)
 	return
 }
 
