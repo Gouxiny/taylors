@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0cf930"],{"63fc":function(t,n,o){"use strict";o.r(n),o.d(n,"getTopList",(function(){return u}));var c=o("b775"),u=function(t){return Object(c["default"])({url:"/stock/top/list",method:"post",data:t})}}}]);
