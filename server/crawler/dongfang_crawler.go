@@ -93,11 +93,23 @@ func (crawler *dongFangCrawler) Loop() {
 }
 
 func (crawler *dongFangCrawler) process() (dongFang *dongFang) {
+	defer func() {
+		recover()
+	}()
+
 	body, err := crawler.get(crawler.url)
 	if err != nil {
 		return
 	}
 	dongFang, err = crawler.dongFangModel.JsonToModel(body)
+	if err != nil {
+		global.GVA_LOG.Error("获取Json err:", err)
+	}
+
+	if dongFang.Data.Diff == nil || len(dongFang.Data.Diff) == 0 {
+		return
+	}
+
 	codes := []string{}
 	for i, diff := range dongFang.Data.Diff {
 		if i <= 100 {
@@ -106,8 +118,9 @@ func (crawler *dongFangCrawler) process() (dongFang *dongFang) {
 	}
 
 	crawler.lock.Lock()
+	defer crawler.lock.Unlock()
 	crawler.topCodes = codes
-	crawler.lock.Unlock()
+
 	return
 }
 
