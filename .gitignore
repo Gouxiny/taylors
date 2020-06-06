@@ -1,7 +1,7 @@
 .idea/
 /web/node_modules
 /web/dist
-/server/resource/web
+#/server/resource/web
 
 .DS_Store
 
