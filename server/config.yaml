@@ -40,7 +40,7 @@ sqlite:
   password: ""
   path: db.db
   config: loc=Asia/Shanghai
-  log-mode: true
+  log-mode: false
 system:
   use-multipoint: false
   env: public

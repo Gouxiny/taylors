@@ -85,10 +85,10 @@ func (crawler *dongFangCrawler) checkTime() (flag bool) {
 func (crawler *dongFangCrawler) Loop() {
 	instence().store(crawler.process())
 	for {
+		time.Sleep(time.Second * time.Duration(crawler.sleepTime))
 		if crawler.checkTime() {
 			instence().store(crawler.process())
 		}
-		time.Sleep(time.Second * time.Duration(crawler.sleepTime))
 	}
 }
 
@@ -98,10 +98,6 @@ func (crawler *dongFangCrawler) process() (dongFang *dongFang) {
 		return
 	}
 	dongFang, err = crawler.dongFangModel.JsonToModel(body)
-	if err != nil {
-		return
-	}
-
 	codes := []string{}
 	for i, diff := range dongFang.Data.Diff {
 		if i <= 100 {

@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e93a3"],{"8d45":function(t,n,s){"use strict";s.r(n),s.d(n,"getAnalysisList",(function(){return e}));var a=s("b775"),e=function(t){return Object(a["default"])({url:"/stock/analysis/list",method:"post",data:t})}}}]);
