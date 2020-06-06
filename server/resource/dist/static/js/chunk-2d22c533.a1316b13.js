@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22c533"],{f36f:function(o,t,n){"use strict";n.r(t),n.d(t,"createWorkFlow",(function(){return e}));var r=n("b775"),e=function(o){return Object(r["default"])({url:"/workflow/createWorkFlow",method:"post",data:o})}}}]);
