@@ -47,3 +47,9 @@ func (analy *analysisCache) Get(code string) (analysisModelList []*analysisModel
 	}
 	return
 }
+
+func (analy *analysisCache) Clean() {
+	analy.lock.Lock()
+	defer analy.lock.Unlock()
+	analy.data = make(map[string][]*analysisModel)
+}

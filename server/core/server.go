@@ -33,9 +33,12 @@ func RunWindowsServer() {
 	time.Sleep(10 * time.Microsecond)
 	global.GVA_LOG.Debug("server run success on ", address)
 
+	//	fmt.Printf(`
+	//	默认自动化文档地址:http://127.0.0.1%s/swagger/index.html
+	//	默认前端文件运行地址:http://127.0.0.1:8080
+	//`, s.Addr)
 	fmt.Printf(`
-	默认自动化文档地址:http://127.0.0.1%s/swagger/index.html
-	默认前端文件运行地址:http://127.0.0.1:8080
+	默认前端文件运行地址:http://127.0.0.1:9999/index
 `, s.Addr)
 	global.GVA_LOG.Error(s.ListenAndServe())
 }

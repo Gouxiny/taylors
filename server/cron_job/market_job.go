@@ -21,6 +21,11 @@ func (job *marketJob) Run() {
 		recover()
 	}()
 
+	saveAll()
+	clean()
+}
+
+func saveAll() {
 	if service.StockCommonService.CheckOffday() { // 判断是否是休市日
 		return
 	}
@@ -38,5 +43,8 @@ func (job *marketJob) Run() {
 			_ = dao.StockDao.Save(stock)
 		}
 	}
+}
 
+func clean() {
+	service.NewAnalysisCache().Clean()
 }
