@@ -1,25 +1,37 @@
 package service
 
 import (
+	"strings"
 	"taylors/crawler"
 	"taylors/model"
-	"taylors/model/request"
+	"taylors/model/param"
 )
 
 type stockTopService struct {
 }
 
-func (*stockTopService) TopList(filter request.StockTopListReq) (stockList []model.Stock, err error) {
+func (*stockTopService) TopList(filter param.TopListParam) (stockList []model.Stock, err error) {
 	stockListCrawler := crawler.NewDongFangCrawler().Top()
 
 	for _, stock := range stockListCrawler {
+		if filter.Name != "" {
+			if !strings.Contains(stock.Name, filter.Name) {
+				continue
+			}
+		}
+
+		if filter.Code != "" {
+			if !strings.Contains(stock.Code, filter.Code) {
+				continue
+			}
+		}
 		if filter.MarketCapitalMax != 0 {
-			if stock.MarketCapital > int64(filter.MarketCapitalMax) {
+			if stock.MarketCapital > filter.MarketCapitalMax {
 				continue
 			}
 		}
 		if filter.MarketCapitalMin != 0 {
-			if stock.MarketCapital < int64(filter.MarketCapitalMin) {
+			if stock.MarketCapital < filter.MarketCapitalMin {
 				continue
 			}
 		}

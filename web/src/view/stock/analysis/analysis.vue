@@ -168,7 +168,7 @@
       }
     },
     created(){
-      this.getTableData()
+      //this.getTableData()
       // setInterval(()=>{
       //   this.getTableData()
       // },10000)

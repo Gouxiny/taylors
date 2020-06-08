@@ -1,5 +1,18 @@
 package param
 
+type TopListParam struct {
+	Name             string
+	Code             string
+	MarketCapitalMax int64
+	MarketCapitalMin int64
+	PercentMax       float64
+	PercentMin       float64
+	VolumeRatioMax   float64
+	VolumeRatioMin   float64
+	CurrentMax       float64
+	CurrentMin       float64
+}
+
 type AllListParam struct {
 	Page             int
 	PageSize         int

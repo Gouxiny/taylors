@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"taylors/global/response"
+	"taylors/model/param"
 	"taylors/model/request"
 	resp "taylors/model/response"
 	"taylors/service"
@@ -26,10 +27,20 @@ func (*stockTop) StockTopList(c *gin.Context) {
 		return
 	}
 
-	req.MarketCapitalMax *= 100000000
-	req.MarketCapitalMin *= 100000000
+	filter := param.TopListParam{
+		Name:             req.Name,
+		Code:             req.Code,
+		MarketCapitalMax: int64(req.MarketCapitalMax * 100000000),
+		MarketCapitalMin: int64(req.MarketCapitalMin * 100000000),
+		PercentMax:       req.PercentMax,
+		PercentMin:       req.PercentMin,
+		VolumeRatioMax:   req.VolumeRatioMax,
+		VolumeRatioMin:   req.VolumeRatioMin,
+		CurrentMax:       req.CurrentMax,
+		CurrentMin:       req.CurrentMin,
+	}
 
-	stockList, err := service.StockTopService.TopList(req)
+	stockList, err := service.StockTopService.TopList(filter)
 	if err != nil {
 		response.FailWithMessage(fmt.Sprintf("获取Top失败，%v", err), c)
 	} else {

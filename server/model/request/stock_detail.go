@@ -1,6 +1,8 @@
 package request
 
 type StockTopListReq struct {
+	Name             string  `json:"name" desc:"名称" `
+	Code             string  `json:"code" desc:"编码" `
 	MarketCapitalMax float64 `json:"marketCapitalMax" desc:"市值范围最大" `
 	MarketCapitalMin float64 `json:"marketCapitalMin" desc:"市值范围最小" `
 	PercentMax       float64 `json:"percentMax" desc:"涨幅范围最大" `

@@ -3,6 +3,18 @@
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
         <el-row>
+          <el-col :span="10">
+            <el-form-item label="名称">
+              <el-input placeholder="平安银行" v-model="searchInfo.name" clearable ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="编码">
+              <el-input placeholder="SZ0000001"  v-model="searchInfo.code" clearable ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="5">
             <el-form-item label="市值">
               <el-input-number placeholder="最小" v-model="searchInfo.marketCapitalMin" ></el-input-number>
@@ -89,6 +101,8 @@
       return {
         listApi: getTopList,
         searchInfo: {
+          name: undefined,
+          code: undefined,
           marketCapitalMin: undefined,
           marketCapitalMax: undefined,
           percentMin: undefined,
