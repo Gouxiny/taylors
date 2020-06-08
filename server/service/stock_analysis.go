@@ -142,73 +142,73 @@ func (*stockAnalysisService) SearchFilter(stockList []*model.Stock, filter *para
 	marketCapitalMinCount := 0
 
 	for _, stockPO := range stockList {
-		if filter.CurrentMax > 0 {
+		if filter.CurrentMax != 0 {
 			if stockPO.Current < filter.CurrentMax {
 				currentMaxCount++
 			}
 		}
-		if filter.CurrentMin > 0 {
+		if filter.CurrentMin != 0 {
 			if stockPO.Current > filter.CurrentMin {
 				currentMinCount++
 			}
 		}
 
-		if filter.VolumeRatioMax > 0 {
+		if filter.VolumeRatioMax != 0 {
 			if stockPO.VolumeRatio < filter.VolumeRatioMax {
 				volumeRatioMaxCount++
 			}
 		}
-		if filter.VolumeRatioMin > 0 {
+		if filter.VolumeRatioMin != 0 {
 			if stockPO.VolumeRatio > filter.VolumeRatioMin {
 				volumeRatioMinCount++
 			}
 		}
 
-		if filter.PercentMax > 0 {
+		if filter.PercentMax != 0 {
 			if stockPO.Percent < filter.PercentMax {
 				percentMaxCount++
 			}
 		}
-		if filter.PercentMin > 0 {
+		if filter.PercentMin != 0 {
 			if stockPO.Percent > filter.PercentMin {
 				percentMinCount++
 			}
 		}
 
-		if filter.MarketCapitalMax > 0 {
+		if filter.MarketCapitalMax != 0 {
 			if stockPO.MarketCapital < filter.MarketCapitalMax {
 				marketCapitalMaxCount++
 			}
 		}
-		if filter.MarketCapitalMin > 0 {
+		if filter.MarketCapitalMin != 0 {
 			if stockPO.MarketCapital > filter.MarketCapitalMin {
 				marketCapitalMinCount++
 			}
 		}
 	}
 
-	if filter.CurrentMax > 0 && currentMaxCount < day {
+	if filter.CurrentMax != 0 && currentMaxCount < day {
 		return
 	}
-	if filter.CurrentMin > 0 && currentMinCount < day {
+	if filter.CurrentMin != 0 && currentMinCount < day {
 		return
 	}
-	if filter.VolumeRatioMax > 0 && volumeRatioMaxCount < day {
+	if filter.VolumeRatioMax != 0 && volumeRatioMaxCount < day {
 		return
 	}
-	if filter.VolumeRatioMin > 0 && volumeRatioMinCount < day {
+	if filter.VolumeRatioMin != 0 && volumeRatioMinCount < day {
 		return
 	}
-	if filter.PercentMax > 0 && percentMaxCount < day {
+	if filter.PercentMax != 0 && percentMaxCount < day {
 		return
 	}
-	if filter.PercentMin > 0 && percentMinCount < day {
+	if filter.PercentMin != 0 && percentMinCount < day {
 		return
 	}
-	if filter.MarketCapitalMax > 0 && marketCapitalMaxCount < day {
+	if filter.MarketCapitalMax != 0 && marketCapitalMaxCount < day {
 		return
 	}
-	if filter.MarketCapitalMin > 0 && marketCapitalMinCount < day {
+	if filter.MarketCapitalMin != 0 && marketCapitalMinCount < day {
 		return
 	}
 

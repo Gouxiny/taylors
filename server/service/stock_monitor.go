@@ -57,42 +57,42 @@ func (srv *stockMonitorService) MonitorList(uid uint, filter request.MonitorList
 			}
 		}
 
-		if filter.MarketCapitalMax > 0 {
+		if filter.MarketCapitalMax != 0 {
 			if stock.MarketCapital > int64(filter.MarketCapitalMax) {
 				continue
 			}
 		}
-		if filter.MarketCapitalMin > 0 {
+		if filter.MarketCapitalMin != 0 {
 			if stock.MarketCapital < int64(filter.MarketCapitalMin) {
 				continue
 			}
 		}
-		if filter.PercentMax > 0 {
+		if filter.PercentMax != 0 {
 			if stock.Percent > filter.PercentMax {
 				continue
 			}
 		}
-		if filter.PercentMin > 0 {
+		if filter.PercentMin != 0 {
 			if stock.Percent < filter.PercentMin {
 				continue
 			}
 		}
-		if filter.VolumeRatioMax > 0 {
+		if filter.VolumeRatioMax != 0 {
 			if stock.VolumeRatio > filter.VolumeRatioMax {
 				continue
 			}
 		}
-		if filter.VolumeRatioMin > 0 {
+		if filter.VolumeRatioMin != 0 {
 			if stock.VolumeRatio < filter.VolumeRatioMin {
 				continue
 			}
 		}
-		if filter.CurrentMax > 0 {
+		if filter.CurrentMax != 0 {
 			if stock.Current > filter.CurrentMax {
 				continue
 			}
 		}
-		if filter.CurrentMin > 0 {
+		if filter.CurrentMin != 0 {
 			if stock.Current < filter.CurrentMin {
 				continue
 			}
