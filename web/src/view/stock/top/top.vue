@@ -5,44 +5,44 @@
         <el-row>
           <el-col :span="5">
             <el-form-item label="市值">
-              <el-input-number placeholder="最小" v-model="searchInfo.marketCapitalMin" :controls="false"></el-input-number>
+              <el-input-number placeholder="最小" v-model="searchInfo.marketCapitalMin" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input-number placeholder="最大"  v-model="searchInfo.marketCapitalMax" :controls="false"></el-input-number>
+              <el-input-number placeholder="最大"  v-model="searchInfo.marketCapitalMax" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="股价">
-              <el-input-number placeholder="最小" v-model="searchInfo.currentMin" :controls="false"></el-input-number>
+              <el-input-number placeholder="最小" v-model="searchInfo.currentMin" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input-number placeholder="最大"  v-model="searchInfo.currentMax" :controls="false"></el-input-number>
+              <el-input-number placeholder="最大"  v-model="searchInfo.currentMax" ></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="5">
             <el-form-item label="涨幅">
-              <el-input-number placeholder="最小"  v-model="searchInfo.percentMin" :controls="false"></el-input-number>
+              <el-input-number placeholder="最小"  v-model="searchInfo.percentMin" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input-number placeholder="最大"  v-model="searchInfo.percentMax" :controls="false"></el-input-number>
+              <el-input-number placeholder="最大"  v-model="searchInfo.percentMax" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="量比">
-              <el-input-number placeholder="最小"  v-model="searchInfo.volume_ratio_min" :controls="false"></el-input-number>
+              <el-input-number placeholder="最小"  v-model="searchInfo.volume_ratio_min" ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
-              <el-input-number placeholder="最大"  v-model="searchInfo.volume_ratio_max" :controls="false"></el-input-number>
+              <el-input-number placeholder="最大"  v-model="searchInfo.volume_ratio_max" ></el-input-number>
             </el-form-item>
           </el-col>
         </el-row>
