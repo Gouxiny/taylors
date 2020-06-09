@@ -6,6 +6,7 @@ ENV GOPROXY=https://goproxy.cn,https://goproxy.io,direct \
     CGO_ENABLED=1
 WORKDIR /taylors
 RUN go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+RUN sed -i 's!http://dl-cdn.alpinelinux.org/!https://mirrors.ustc.edu.cn/!g' /etc/apk/repositories
 ADD . /taylors
 RUN go env && go list && go build -o app main.go
 # 时区设置成当前时区
