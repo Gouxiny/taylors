@@ -15,11 +15,6 @@ type stockAnalysisService struct {
 }
 
 func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam) (stockList []*model.Stock, total int, err error) {
-	stockCodeList, err := dao.StockDao.CodeList()
-	if err != nil {
-		return
-	}
-
 	page := filter.Page
 	if page < 1 {
 		page = 1
@@ -46,48 +41,7 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 	}
 
 	if !exitCache {
-		scoreList := make([]*analysisModel, 0, 5000)
-		analysisCh := make(chan *analysisModel, 100)
-
-		go func() {
-			for analysis := range analysisCh {
-				if analysis != nil && analysis.code != "" {
-					scoreList = append(scoreList, analysis)
-				}
-			}
-		}()
-
-		wg := sync.WaitGroup{}
-
-		for _, stock := range stockCodeList {
-			wg.Add(1)
-			go func(stockObj *model.Stock) {
-				defer wg.Done()
-				stockPOList, err := dao.StockDao.FindByAnalysisFilter(stockObj.Code, filter.StartTime, filter.EndTime)
-				if err != nil {
-					return
-				}
-
-				if len(stockPOList) == 0 {
-					return
-				}
-				if !analy.SearchFilter(stockPOList, filter) {
-					return
-				}
-
-				calculateScore := analy.CalculateScore(stockPOList)
-				analysisCh <- &analysisModel{
-					score: calculateScore,
-					code:  stockObj.Code,
-				}
-			}(stock)
-		}
-		wg.Wait()
-
-		sort.Sort(analysisModelList(scoreList))
-
-		NewAnalysisCache().Cache(md5, scoreList)
-		analysisModelCacheList = scoreList
+		analysisModelCacheList = analy.Calculate(filter, md5)
 	}
 
 	endIndex := page * pageSize
@@ -97,7 +51,7 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 	}
 
 	codes := []string{}
-	for i := startIndex; i < endIndex; i++ {
+	for i := startIndex; i <= endIndex; i++ {
 		codes = append(codes, analysisModelCacheList[i].code)
 	}
 
@@ -113,6 +67,55 @@ func (analy *stockAnalysisService) AnalysisList(filter *param.AnalysisListParam)
 		stockPO.MarketCapital /= 100000000
 		stockList = append(stockList, stockPO)
 	}
+	return
+}
+
+func (analy *stockAnalysisService) Calculate(filter *param.AnalysisListParam, md5 string) (scoreList []*analysisModel) {
+	stockCodeList, err := dao.StockDao.CodeList()
+	if err != nil {
+		return
+	}
+	scoreList = make([]*analysisModel, 0, 5000)
+	analysisCh := make(chan *analysisModel, 100)
+
+	go func() {
+		for analysis := range analysisCh {
+			if analysis != nil && analysis.code != "" {
+				scoreList = append(scoreList, analysis)
+			}
+		}
+	}()
+
+	wg := sync.WaitGroup{}
+
+	for _, stock := range stockCodeList {
+		wg.Add(1)
+		go func(stockObj *model.Stock) {
+			defer wg.Done()
+			stockPOList, err := dao.StockDao.FindByAnalysisFilter(stockObj.Code, filter.StartTime, filter.EndTime)
+			if err != nil {
+				return
+			}
+
+			if len(stockPOList) == 0 {
+				return
+			}
+			if !analy.SearchFilter(stockPOList, filter) {
+				return
+			}
+
+			calculateScore := analy.CalculateScore(stockPOList)
+			analysisCh <- &analysisModel{
+				score: calculateScore,
+				code:  stockObj.Code,
+			}
+		}(stock)
+	}
+	wg.Wait()
+
+	sort.Sort(analysisModelList(scoreList))
+
+	NewAnalysisCache().Cache(md5, scoreList)
 	return
 }
 
