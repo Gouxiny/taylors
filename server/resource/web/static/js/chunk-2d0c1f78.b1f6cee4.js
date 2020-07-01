@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c1f78"],{"47fe":function(e,t,n){"use strict";n.r(t),n.d(t,"createTemp",(function(){return c}));var o=n("b775"),c=function(e){return Object(o["default"])({url:"/autoCode/createTemp",method:"post",data:e,responseType:"blob"})}}}]);

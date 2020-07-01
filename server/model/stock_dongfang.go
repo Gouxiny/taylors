@@ -15,7 +15,7 @@ type Stock struct {
 	PeTtm        float64 `gorm:"column:pe_ttm" json:"f9"`        //市盈率
 	VolumeRatio  float64 `gorm:"column:volume_ratio" json:"f10"` //量比
 
-	F11 int `gorm:"column:f11" json:"f11"`
+	F11 float64 `gorm:"column:f11" json:"f11"`
 
 	Code              string  `gorm:"column:code" json:"f12"`               //编码
 	Szh               int     `gorm:"column:szh" json:"f13"`                //0:sz 1:sh
@@ -27,13 +27,13 @@ type Stock struct {
 	MarketCapital     int64   `gorm:"column:market_capital" json:"f20"`     //总市值
 	CirculationMarket int64   `gorm:"column:circulation_market" json:"f21"` //流通市值
 
-	F22 int `gorm:"column:f22" json:"f22"`
+	F22 float64 `gorm:"column:f22" json:"f22"`
 
 	Pb          float64 `gorm:"column:pb" json:"f23"`           //市净率
 	Percent60   float64 `gorm:"column:percent_60" json:"f24"`   //60日涨幅
 	PercentYear float64 `gorm:"column:percent_year" json:"f25"` //年初至今涨跌幅
 
-	F62  int64   `gorm:"column:f62" json:"f62"`
+	F62  float64 `gorm:"column:f62" json:"f62"`
 	F115 float64 `gorm:"column:f115" json:"f115"`
 
 	F128 string `gorm:"column:f128" json:"f128"`

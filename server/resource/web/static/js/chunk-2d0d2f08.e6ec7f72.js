@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d2f08"],{"5b49":function(t,n,o){"use strict";o.r(n),o.d(n,"getAllList",(function(){return c}));var u=o("b775"),c=function(t){return Object(u["default"])({url:"/stock/all/list",method:"post",data:t})}}}]);

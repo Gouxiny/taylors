@@ -1,9 +1,9 @@
 package service
 
 import (
-	"taylors/config"
 	"taylors/global"
 	"taylors/model"
+	"taylors/model/config"
 	"taylors/utils"
 )
 

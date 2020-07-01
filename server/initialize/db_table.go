@@ -3,6 +3,7 @@ package initialize
 import (
 	"taylors/dao"
 	"taylors/global"
+	"taylors/logger"
 	"taylors/model"
 )
 
@@ -24,5 +25,5 @@ func DBTables() {
 		model.StockMonitor{},
 	)
 	dao.Init()
-	global.GVA_LOG.Debug("register table success")
+	logger.Debug("register table success")
 }

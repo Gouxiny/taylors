@@ -1,7 +1,7 @@
 package model
 
 import (
-	"taylors/config"
+	"taylors/model/config"
 )
 
 //配置文件结构体

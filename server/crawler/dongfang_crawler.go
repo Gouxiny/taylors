@@ -6,6 +6,7 @@ import (
 	"strings"
 	"sync"
 	"taylors/global"
+	"taylors/logger"
 	"taylors/model"
 	"time"
 )
@@ -103,7 +104,7 @@ func (crawler *dongFangCrawler) process() (dongFang *dongFang) {
 	}
 	dongFang, err = crawler.dongFangModel.JsonToModel(body)
 	if err != nil {
-		global.GVA_LOG.Error("获取Json err:", err)
+		logger.Error("获取Json err:", err)
 	}
 
 	if dongFang.Data.Diff == nil || len(dongFang.Data.Diff) == 0 {

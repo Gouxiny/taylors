@@ -3,9 +3,8 @@ package global
 import (
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
-	oplogging "github.com/op/go-logging"
 	"github.com/spf13/viper"
-	"taylors/config"
+	"taylors/model/config"
 )
 
 var (
@@ -13,5 +12,4 @@ var (
 	GVA_REDIS  *redis.Client
 	GVA_CONFIG config.Server
 	GVA_VP     *viper.Viper
-	GVA_LOG    *oplogging.Logger
 )

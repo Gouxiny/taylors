@@ -3,6 +3,7 @@ package initialize
 import (
 	"github.com/go-redis/redis"
 	"taylors/global"
+	"taylors/logger"
 )
 
 func Redis() {
@@ -14,9 +15,9 @@ func Redis() {
 	})
 	pong, err := client.Ping().Result()
 	if err != nil {
-		global.GVA_LOG.Error(err)
+		logger.Error(err)
 	} else {
-		global.GVA_LOG.Info("redis connect ping response:", pong)
+		logger.Info("redis connect ping response:", pong)
 		global.GVA_REDIS = client
 	}
 }
