@@ -26,7 +26,11 @@ func main() {
 	if err != nil {
 		panic("配置错误")
 	}
+
 	initialize.Init()
+	defer func() {
+		_ = global.GVA_DB.Close()
+	}()
 
 	Router := Routers()
 	Router.Static("/form-generator", "./resource/page")

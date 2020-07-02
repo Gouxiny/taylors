@@ -8,12 +8,8 @@ func Init() {
 	case "mysql":
 		Mysql()
 	}
-	DBTables()
 
-	// 程序结束前关闭数据库链接
-	defer func() {
-		_ = global.GVA_DB.Close()
-	}()
+	DBTables()
 
 	if global.GVA_CONFIG.System.UseMultipoint {
 		// 初始化redis服务
