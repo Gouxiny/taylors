@@ -147,10 +147,3 @@ swag init
 - 表单生成器：表单生成器借助 [@form-generator](https://github.com/JakHuang/form-generator)。
 - 代码生成器：后台基础逻辑以及简单curd的代码生成器。 
 
-## 6. 计划任务
-
-- [ ] 导入，导出Excel
-- [ ] Echart图表支持
-- [ ] 工作流，任务交接功能开发
-- [ ] 单独前端使用模式以及数据模拟
-
