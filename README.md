@@ -1,4 +1,9 @@
-﻿
+﻿## 1. 项目说明
+
+项目用于股票实时数据分析，可以配合量化金融使用，个人投资者，机构投资者。
+
+欢迎start
+
 ## 2. 使用说明
 
 ```
@@ -13,7 +18,7 @@
 
 ```bash
 # clone the project
-git clone https://github.com/piexlmax/gin-vue-admin.git
+git clone https://github.com/madhatterGandalf/taylors.git
 
 # enter the project directory
 cd web
@@ -83,9 +88,9 @@ swag init
 ## 4. 项目架构
 ### 4.1 系统架构图
 
-![系统架构图](./docs/gin-vue-admin.png)
+![系统架构图](./docs/taylors.png)
 
-### 4.2 前端详细设计图 （提供者:<a href="https://github.com/baobeisuper">baobeisuper</a>）
+### 4.2 前端详细设计图
 
 ![前端详细设计图](http://qmplusimg.henrongyi.top/naotu.png)
 
@@ -141,11 +146,4 @@ swag init
 - 分片长传：提供文件分片上传和大文件分片上传功能示例。
 - 表单生成器：表单生成器借助 [@form-generator](https://github.com/JakHuang/form-generator)。
 - 代码生成器：后台基础逻辑以及简单curd的代码生成器。 
-
-## 6. 计划任务
-
-- [ ] 导入，导出Excel
-- [ ] Echart图表支持
-- [ ] 工作流，任务交接功能开发
-- [ ] 单独前端使用模式以及数据模拟
 
